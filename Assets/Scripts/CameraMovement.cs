@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour
     private float rotationSpeed = 0.1f;
 
     private float maxHeight = 60f;
-    private float minHeight = 25f;
+    private float minHeight = 15f;
 
     private Vector2 p1;
     private Vector2 p2;
@@ -45,12 +45,12 @@ public class CameraMovement : MonoBehaviour
         if ((transform.localPosition.y >= maxHeight) && (scrollSp > 0))
         {
             scrollSp = 0;
-            transform.localPosition = new Vector3(transform.position.x, 60, transform.position.z);
+            transform.localPosition = new Vector3(transform.position.x, maxHeight, transform.position.z);
         }
         else if ((transform.localPosition.y <= minHeight) && (scrollSp < 0))
         {
             scrollSp = 0;
-            transform.localPosition = new Vector3(transform.position.x, 25, transform.position.z);
+            transform.localPosition = new Vector3(transform.position.x, minHeight, transform.position.z);
         }
         
         Vector3 verticalMove = new Vector3(0, scrollSp, 0);
@@ -65,8 +65,6 @@ public class CameraMovement : MonoBehaviour
         transform.position += move;
         
         getCameraRotation();
-        
-        Debug.Log(transform.localEulerAngles);
     }
 
     void getCameraRotation()
