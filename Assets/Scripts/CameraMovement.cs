@@ -5,98 +5,150 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private float speed = 0.0035f;
-    private float zoomSpeed = 10f;
-    private float rotationSpeed = 0.1f;
+    public static CameraMovement instance;
+    public float normalSpeed;
+    public float fastSpeed;
+    public float movementSpeed = 0.0035f;
+    public float movementTime;
+    public float rotationAmount;
+    public Vector3 zoomAmount;
 
-    private float maxHeight = 60f;
-    private float minHeight = 15f;
+    private Vector3 newPosition;
+    private Quaternion newRotation;
+    private Vector3 newZoom;
 
-    private Vector2 p1;
-    private Vector2 p2;
+    private Vector3 dragStartPosition;
+    private Vector3 dragCurrentPosition;
+    private Vector3 rotateStartPosition;
+    private Vector3 rotateCurrentPosition;
 
-    public GameObject camera;
-    private Transform cameraTransform;
+    public Transform cameraTransform;
     
     // Start is called before the first frame update
     void Start()
     {
-        cameraTransform = camera.GetComponent<Transform>();
+        instance = this;
+        newPosition = transform.position;
+        newRotation = transform.rotation;
+        newZoom = cameraTransform.localPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 0.01f;
-            zoomSpeed = 10f;
-        }
-        else
-        {
-            speed = 0.0035f;
-            zoomSpeed = 5f;
-        }
-            
-        float hsp = transform.position.y * speed * Input.GetAxis("Horizontal");
-        float vsp = transform.position.y * speed * Input.GetAxis("Vertical");
-        float scrollSp = Mathf.Log(transform.position.y) * -zoomSpeed * Input.GetAxis("Mouse ScrollWheel");
-
-        if ((transform.localPosition.y >= maxHeight) && (scrollSp > 0))
-        {
-            scrollSp = 0;
-            transform.localPosition = new Vector3(transform.position.x, maxHeight, transform.position.z);
-        }
-        else if ((transform.localPosition.y <= minHeight) && (scrollSp < 0))
-        {
-            scrollSp = 0;
-            transform.localPosition = new Vector3(transform.position.x, minHeight, transform.position.z);
-        }
+        HandleMouseInput();
+        HandleMovementInput();
         
-        Vector3 verticalMove = new Vector3(0, scrollSp, 0);
-        Vector3 lateralMove = hsp * transform.right;
-        Vector3 forwardMove = transform.forward;
-        forwardMove.y = 0;
-        forwardMove.Normalize();
-        forwardMove *= vsp;
-
-        Vector3 move = verticalMove + lateralMove + forwardMove;
-
-        transform.position += move;
-        
-        getCameraRotation();
     }
 
-    void getCameraRotation()
+    void HandleMouseInput()
     {
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            newZoom += zoomAmount * (Input.mouseScrollDelta.y * movementTime);
+        }
+        
         if (Input.GetMouseButtonDown(2))
         {
-            p1 = Input.mousePosition;
+            if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            {
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                float entry;
+
+                if (plane.Raycast(ray, out entry))
+                {
+                    dragStartPosition = ray.GetPoint(entry);
+                }
+            }
+            else
+            {
+                rotateStartPosition = Input.mousePosition;
+            }
+
         }
 
         if (Input.GetMouseButton(2))
         {
-            p2 = Input.mousePosition;
-
-            float dx = (p2 - p1).x * rotationSpeed;
-            float dy = (p2 - p1).y * rotationSpeed;
-            
-            transform.rotation *= Quaternion.Euler(new Vector3(0,dx,0));
-            cameraTransform.rotation *= Quaternion.Euler(new Vector3(-dy,0,0));
-
-            if (cameraTransform.localEulerAngles.x > 60)
+            if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
             {
-                cameraTransform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
-                Debug.Log("yüksek");
-            }
-            
-            if (cameraTransform.localEulerAngles.x < 40)
-            {
-                cameraTransform.rotation = Quaternion.Euler(new Vector3(40, 0, 0));
-                Debug.Log("alçak");
-            }
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            p1 = p2;
+                float entry;
+
+                if (plane.Raycast(ray, out entry))
+                {
+                    dragCurrentPosition = ray.GetPoint(entry);
+
+                    newPosition = transform.position + dragStartPosition - dragCurrentPosition;
+                }
+            }
+            else
+            {
+                rotateCurrentPosition = Input.mousePosition;
+
+                Vector3 difference = rotateStartPosition - rotateCurrentPosition;
+
+                rotateStartPosition = rotateCurrentPosition;
+            
+                newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / 5f));
+            }
         }
+    }
+
+    void HandleMovementInput()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = fastSpeed;
+        }
+        else
+        {
+            movementSpeed = normalSpeed;
+        }
+        
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            newPosition += (transform.forward * movementSpeed);
+        }
+
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            newPosition += (transform.forward * -movementSpeed);
+        }
+        
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            newPosition += (transform.right * movementSpeed);
+        }
+        
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            newPosition += (transform.right * -movementSpeed);
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            newRotation *= Quaternion.Euler(Vector3.up * rotationAmount);
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount);
+        }
+        
+        if (Input.GetKey(KeyCode.R))
+        {
+            newZoom += zoomAmount;
+        }
+        if (Input.GetKey(KeyCode.F))
+        {
+            newZoom += -zoomAmount;
+        }
+
+        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
+        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
     }
 }
