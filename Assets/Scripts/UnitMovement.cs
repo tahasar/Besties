@@ -15,8 +15,8 @@ public class UnitMovement : MonoBehaviour
 
     private List<GameObject> unitsToFormation = new List<GameObject>();
     
-    [SerializeField] private float _radius = 1;
-    [SerializeField] private float _radiusGrowthMultiplier = 0;
+    [SerializeField] private int _radius = 1;
+    [SerializeField] private int _radiusGrowthMultiplier = 0;
     [SerializeField] private float _rotations = 1;
     [SerializeField] private int _rings = 1;
     [SerializeField] private float _ringOffset = 1;
@@ -41,18 +41,21 @@ public class UnitMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity,ground))
             {
-                if(unitsToFormation.Count > 1)
+                if (unitsToFormation.Count > 1)
                 {
                     var amountPerRing = unitsToFormation.Count / _rings;
                     var ringOffset = 2f;
                     
+                    if (unitsToFormation.Count % _rings != 0)
+                    {
+                        amountPerRing++;
+                        ringOffset += _ringOffset;
+                    }
+                    
                     for (int i = 0; i < _rings; i++) {
-                        
-                        Debug.Log("i kısmı");
                         
                         for (var j = 0; j < amountPerRing; j++)
                         {
-                            Debug.Log("j kısmı");
                             var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
 
                             var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
@@ -61,14 +64,7 @@ public class UnitMovement : MonoBehaviour
 
                             var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
                                 
-                            //var angle = Mathf.PI * 2 * angleStep * i;
-                        
-                            //Debug.Log($"unit.{i} > {angle}");
-                        
-                            //var z = Mathf.Cos(angle) * 5;
-                            //var x = Mathf.Sin(angle) * 5;
-
-                            //var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
+                           
 
                             unitsToFormation[j].GetComponent<NavMeshAgent>().SetDestination(pos);
                         }
@@ -76,54 +72,8 @@ public class UnitMovement : MonoBehaviour
                         ringOffset += _ringOffset;
                     }
                     
-                    //float angleStep = 360 / unitsToFormation.Count - 1;
-                    //angleStep = Mathf.RoundToInt(angleStep);
-//
-                    //int i;
-                    //for (i = 0; i < unitsToFormation.Count; i++) // ikinci unit'ten başlar ve altıncı unit ile ilk halkayı oluşturur.
-                    //{
-                    //    
-                    //    if (i == 0) // ilk unit merkeze konumlanır.
-                    //    {
-                    //        unitsToFormation[i].GetComponent<NavMeshAgent>().SetDestination(hit.point);
-                    //        continue;
-                    //    }
-                    //    
-                    //    //////////////////////////////////////////////////////////////////////////3
-                    //    var amountPerRing = _amount / _rings;
-                    //    var ringOffset = 0f;
-                    //    
-                    //    for (i = 0; i < _rings; i++) {
-                    //        for (var j = 0; j < amountPerRing; j++)
-                    //        {
-                    //            var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
-//
-                    //            var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
-                    //            var x = Mathf.Cos(angle) * radius;
-                    //            var z = Mathf.Sin(angle) * radius;
-//
-                    //            var pos = new Vector3(x, 0, z);
-                    //            
-                    //            //var angle = Mathf.PI * 2 * angleStep * i;
-                    //    
-                    //            //Debug.Log($"unit.{i} > {angle}");
-                    //    
-                    //            //var z = Mathf.Cos(angle) * 5;
-                    //            //var x = Mathf.Sin(angle) * 5;
-//
-                    //            //var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
-//
-                    //            unitsToFormation[i].GetComponent<NavMeshAgent>().SetDestination(pos);
-                    //        }
-//
-                    //        ringOffset += _ringOffset;
-                    //    }
-                        //////////////////////////////////////////////////////////////////////////
-                        /// 
-                        
-                        
-                        //Mathf.PI * (2 * _rotations) / amountPerRing;
-                        //unitsToFormation[i].transform.localPosition = new Vector3(hit.point.x + 1, unitsToFormation[i].transform.position.y, hit.point.z);
+                    
+                   
                 }
                 else
                 {
