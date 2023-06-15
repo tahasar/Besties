@@ -13,8 +13,8 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     void Start()
     { 
         print("Connecting to server...");
-        //PhotonNetwork.NickName = MasterManager.GameSettings.Nickname;
-        //PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;
+        PhotonNetwork.NickName = MasterManager.GameSettings.Nickname;
+        PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -29,7 +29,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("Lobby");
         Debug.Log("connected.");
         print("Connected to server.");
-        //print(PhotonNetwork.LocalPlayer.NickName);
+        print(PhotonNetwork.LocalPlayer.NickName);
     }
 
     public override void OnDisconnected(DisconnectCause cause)
