@@ -275,6 +275,7 @@ MonoBehaviour:
   _rings: 1
   _ringOffset: 1
   _nthOffset: 0
+  unitTeam: 1
 --- !u!114 &-832535506758428286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +327,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8320768401978291547}
+  - {fileID: -832535506758428286}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

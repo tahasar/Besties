@@ -18,6 +18,10 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
     [SerializeField] private float _ringOffset = 1;
     [SerializeField] private float _nthOffset = 0;
 
+    // Define team colors or IDs
+    public enum Team { Red, Blue };
+    public Team unitTeam;
+
     // Start is called before the first frame update
     void Start()
     {
