@@ -40,7 +40,7 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
             Debug.Log(PhotonNetwork.LocalPlayer.NickName);
         }
         
-        if (!photonView.IsMine && PhotonNetwork.NickName == unit.team.ToString())
+        if (!photonView.IsMine && PhotonNetwork.NickName != unit.team.ToString())
             return;
 
         if (Input.GetMouseButtonDown(1))
