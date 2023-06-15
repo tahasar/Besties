@@ -15,4 +15,5 @@ public enum Team
 {
     Blue,
     Red,
+    Yellow,
 }

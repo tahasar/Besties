@@ -30,9 +30,6 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
         myCam = Camera.main;
         myAgent = GetComponent<NavMeshAgent>();
         unit = GetComponent<Unit>();
-        
-
-        PhotonNetwork.IsMasterClient.Equals(false);
     }
 
     // Update is called once per frame
@@ -43,9 +40,10 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
             Debug.Log(PhotonNetwork.LocalPlayer.NickName);
         }
         
-        if (!photonView.IsMine && PhotonNetwork.NickName != unit.team.ToString())
+        if (PhotonNetwork.NickName != unit.team.ToString())
             return;
-
+        
+        
         if (Input.GetMouseButtonDown(1))
         {
             unitsToFormation = UnitSelections.Instance.unitsSelected;
