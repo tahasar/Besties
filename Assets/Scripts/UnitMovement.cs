@@ -30,6 +30,9 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
         myCam = Camera.main;
         myAgent = GetComponent<NavMeshAgent>();
         unit = GetComponent<Unit>();
+        
+
+        PhotonNetwork.IsMasterClient.Equals(false);
     }
 
     // Update is called once per frame
