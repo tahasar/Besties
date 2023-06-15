@@ -63,7 +63,9 @@ public class UnitMovement : MonoBehaviour
                             var z = Mathf.Sin(angle) * radius;
 
                             var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
-                            
+                                
+                           
+
                             unitsToFormation[j].GetComponent<NavMeshAgent>().SetDestination(pos);
                         }
 
