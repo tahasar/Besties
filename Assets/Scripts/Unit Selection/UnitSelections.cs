@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Photon.Realtime;
 using Photon.Pun;
 using UnityEngine;
 

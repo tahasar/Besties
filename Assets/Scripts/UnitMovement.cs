@@ -4,6 +4,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using Photon.Realtime;
+using Photon.Pun;
 
 public class UnitMovement : MonoBehaviour
 {
