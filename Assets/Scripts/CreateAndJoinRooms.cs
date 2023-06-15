@@ -21,15 +21,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        
-        dropdown.options[1].
-
-        
         PhotonNetwork.JoinRoom(joinInput.text);
     }
 
     public override void OnJoinedRoom()
     {
+        PhotonNetwork.LocalPlayer.NickName = dropdown.captionText.text;
         PhotonNetwork.LoadLevel("MainGame");
     }
 }

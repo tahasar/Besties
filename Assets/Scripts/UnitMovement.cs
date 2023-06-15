@@ -32,6 +32,11 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log(PhotonNetwork.LocalPlayer.NickName);
+        }
+        
         if (!photonView.IsMine)
             return;
 
