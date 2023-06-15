@@ -77,7 +77,7 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
 
                                 var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
 
-                                photonView.RPC("SetDestinationRPC", RpcTarget.All, pos, j);
+                                photonView.RPC("SetDestinationRPC", RpcTarget.MasterClient, pos, j);
                             }
 
                             ringOffset += _ringOffset;
@@ -85,7 +85,7 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
                     }
                     else
                     {
-                        photonView.RPC("SetDestinationRPC", RpcTarget.All, hit.point, -1);
+                        photonView.RPC("SetDestinationRPC", RpcTarget.MasterClient, hit.point, -1);
                     }
                 }
                 else if (unitTeam == Team.Blue)
@@ -112,7 +112,7 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
 
                                 var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
 
-                                photonView.RPC("SetDestinationRPC", RpcTarget.All, pos, j);
+                                photonView.RPC("SetDestinationRPC", RpcTarget.MasterClient, pos, j);
                             }
 
                             ringOffset += _ringOffset;
@@ -120,7 +120,7 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
                     }
                     else
                     {
-                        photonView.RPC("SetDestinationRPC", RpcTarget.All, hit.point, -1);
+                        photonView.RPC("SetDestinationRPC", RpcTarget.MasterClient, hit.point, -1);
                     }
                 }
             }
