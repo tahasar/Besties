@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Singletons/MasterManager")]
 public class MasterManager : SingletonScriptableObject<MasterManager>
 {
-    [SerializeField] private GameSettings _gameSettings;
+    [SerializeField] public GameSettings _gameSettings;
     
     public static GameSettings GameSettings => Instance._gameSettings;
 }
