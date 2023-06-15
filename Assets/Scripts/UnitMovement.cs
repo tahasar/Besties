@@ -32,54 +32,58 @@ public class UnitMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (UnitSelections.Instance.isMine)
         {
-            unitsToFormation = UnitSelections.Instance.unitsSelected;
-            
-            RaycastHit hit;
-            Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity,ground))
+            if (Input.GetMouseButtonDown(1))
             {
-                if (unitsToFormation.Count > 1)
+                unitsToFormation = UnitSelections.Instance.unitsSelected;
+            
+                RaycastHit hit;
+                Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity,ground))
                 {
-                    var amountPerRing = unitsToFormation.Count / _rings;
-                    var ringOffset = 2f;
-                    
-                    if (unitsToFormation.Count % _rings != 0)
+                    if (unitsToFormation.Count > 1)
                     {
-                        amountPerRing++;
-                        ringOffset += _ringOffset;
-                    }
+                        var amountPerRing = unitsToFormation.Count / _rings;
+                        var ringOffset = 2f;
                     
-                    for (int i = 0; i < _rings; i++) {
-                        
-                        for (var j = 0; j < amountPerRing; j++)
+                        if (unitsToFormation.Count % _rings != 0)
                         {
-                            var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
+                            amountPerRing++;
+                            ringOffset += _ringOffset;
+                        }
+                    
+                        for (int i = 0; i < _rings; i++) {
+                        
+                            for (var j = 0; j < amountPerRing; j++)
+                            {
+                                var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
 
-                            var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
-                            var x = Mathf.Cos(angle) * radius;
-                            var z = Mathf.Sin(angle) * radius;
+                                var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
+                                var x = Mathf.Cos(angle) * radius;
+                                var z = Mathf.Sin(angle) * radius;
 
-                            var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
+                                var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
                                 
                            
 
-                            unitsToFormation[j].GetComponent<NavMeshAgent>().SetDestination(pos);
-                        }
+                                unitsToFormation[j].GetComponent<NavMeshAgent>().SetDestination(pos);
+                            }
 
-                        ringOffset += _ringOffset;
-                    }
+                            ringOffset += _ringOffset;
+                        }
                     
                     
                    
-                }
-                else
-                {
-                    myAgent.SetDestination(hit.point);
+                    }
+                    else
+                    {
+                        myAgent.SetDestination(hit.point);
+                    }
                 }
             }
         }
+        
     }
 }

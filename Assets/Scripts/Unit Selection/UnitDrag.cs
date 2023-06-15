@@ -26,25 +26,28 @@ public class UnitDrag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (UnitSelections.Instance.isMine)
         {
-            startPosition = Input.mousePosition;
-            selectionBox = new Rect();
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                startPosition = Input.mousePosition;
+                selectionBox = new Rect();
+            }
 
-        if (Input.GetMouseButton(0))
-        {
-            endPosition = Input.mousePosition;
-            DrawVisual();
-            DrawSelection();
-        }
+            if (Input.GetMouseButton(0))
+            {
+                endPosition = Input.mousePosition;
+                DrawVisual();
+                DrawSelection();
+            }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            SelectUnits();
-            startPosition = Vector2.zero;
-            endPosition = Vector2.zero;
-            DrawVisual();
+            if (Input.GetMouseButtonUp(0))
+            {
+                SelectUnits();
+                startPosition = Vector2.zero;
+                endPosition = Vector2.zero;
+                DrawVisual();
+            }
         }
     }
 
@@ -63,26 +66,29 @@ public class UnitDrag : MonoBehaviour
 
     void DrawSelection()
     {
-        if (Input.mousePosition.x < startPosition.x)
+        if (UnitSelections.Instance.isMine)
         {
-            selectionBox.xMin = Input.mousePosition.x;
-            selectionBox.xMax = startPosition.x;
-        }
-        else
-        {
-            selectionBox.xMin = startPosition.x;
-            selectionBox.xMax = Input.mousePosition.x;
-        }
+            if (Input.mousePosition.x < startPosition.x)
+            {
+                selectionBox.xMin = Input.mousePosition.x;
+                selectionBox.xMax = startPosition.x;
+            }
+            else
+            {
+                selectionBox.xMin = startPosition.x;
+                selectionBox.xMax = Input.mousePosition.x;
+            }
 
-        if (Input.mousePosition.y < startPosition.y)
-        {
-            selectionBox.yMin = Input.mousePosition.y;
-            selectionBox.yMax = startPosition.y;
-        }
-        else
-        {
-            selectionBox.yMin = startPosition.y;
-            selectionBox.yMax = Input.mousePosition.y;
+            if (Input.mousePosition.y < startPosition.y)
+            {
+                selectionBox.yMin = Input.mousePosition.y;
+                selectionBox.yMax = startPosition.y;
+            }
+            else
+            {
+                selectionBox.yMin = startPosition.y;
+                selectionBox.yMax = Input.mousePosition.y;
+            }
         }
     }
 

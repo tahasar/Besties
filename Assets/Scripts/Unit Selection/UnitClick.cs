@@ -16,40 +16,43 @@ public class UnitClick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (UnitSelections.Instance.isMine)
         {
-            RaycastHit hit;
-            Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetKey(KeyCode.LeftShift))
+                RaycastHit hit;
+                Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable))
                 {
-                    UnitSelections.Instance.ShiftClickSelect(hit.collider.gameObject);
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        UnitSelections.Instance.ShiftClickSelect(hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        UnitSelections.Instance.ClickSelect(hit.collider.gameObject);
+                    }
                 }
                 else
                 {
-                    UnitSelections.Instance.ClickSelect(hit.collider.gameObject);
+                    if(!Input.GetKey(KeyCode.LeftShift))
+                    {
+                        UnitSelections.Instance.DeselectAll();
+                    }
                 }
             }
-            else
+            
+            if (Input.GetMouseButtonDown(1))
             {
-                if(!Input.GetKey(KeyCode.LeftShift))
+                RaycastHit hit;
+                Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
+                if(Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
                 {
-                    UnitSelections.Instance.DeselectAll();
+                    groundMarker.transform.position = hit.point;
+                    groundMarker.SetActive(false);
+                    groundMarker.SetActive(true);
                 }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            RaycastHit hit;
-            Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
-            {
-                groundMarker.transform.position = hit.point;
-                groundMarker.SetActive(false);
-                groundMarker.SetActive(true);
             }
         }
     }
