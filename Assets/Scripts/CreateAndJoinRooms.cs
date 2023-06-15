@@ -10,6 +10,9 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public TMP_InputField createInput;
 
     public TMP_InputField joinInput;
+    
+    public TMP_Dropdown dropdown;
+
 
     public void CreateRoom()
     {
@@ -18,6 +21,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
+        
+        dropdown.options[1].
+
+        
         PhotonNetwork.JoinRoom(joinInput.text);
     }
 

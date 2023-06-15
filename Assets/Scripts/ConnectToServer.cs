@@ -24,6 +24,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
+        PhotonNetwork.LocalPlayer.NickName = PhotonNetwork.LocalPlayer.UserId;
         SceneManager.LoadScene("Lobby");
         Debug.Log("connected.");
         print("Connected to server.");
