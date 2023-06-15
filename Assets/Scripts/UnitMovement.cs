@@ -22,11 +22,14 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
     public enum Team { Red, Blue };
     public Team unitTeam;
 
+    private Unit unit;
+
     // Start is called before the first frame update
     void Start()
     {
         myCam = Camera.main;
         myAgent = GetComponent<NavMeshAgent>();
+        unit = GetComponent<Unit>();
     }
 
     // Update is called once per frame
@@ -37,7 +40,7 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
             Debug.Log(PhotonNetwork.LocalPlayer.NickName);
         }
         
-        if (!photonView.IsMine)
+        if (!photonView.IsMine && PhotonNetwork.NickName == unit.team.ToString())
             return;
 
         if (Input.GetMouseButtonDown(1))

@@ -26,7 +26,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LocalPlayer.NickName = dropdown.captionText.text;
+        PhotonNetwork.NickName = dropdown.captionText.text;
         PhotonNetwork.LoadLevel("MainGame");
     }
 }
