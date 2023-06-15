@@ -44,37 +44,75 @@ public class UnitMovement : MonoBehaviourPun, IPunObservable
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-                if (unitsToFormation.Count > 1)
+                if (unitTeam == Team.Red)
                 {
-                    var amountPerRing = unitsToFormation.Count / _rings;
-                    var ringOffset = 2f;
-
-                    if (unitsToFormation.Count % _rings != 0)
+                    if (unitsToFormation.Count > 1)
                     {
-                        amountPerRing++;
-                        ringOffset += _ringOffset;
-                    }
+                        var amountPerRing = unitsToFormation.Count / _rings;
+                        var ringOffset = 2f;
 
-                    for (int i = 0; i < _rings; i++)
-                    {
-                        for (var j = 0; j < amountPerRing; j++)
+                        if (unitsToFormation.Count % _rings != 0)
                         {
-                            var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
-                            var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
-                            var x = Mathf.Cos(angle) * radius;
-                            var z = Mathf.Sin(angle) * radius;
-
-                            var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
-
-                            photonView.RPC("SetDestinationRPC", RpcTarget.All, pos, j);
+                            amountPerRing++;
+                            ringOffset += _ringOffset;
                         }
 
-                        ringOffset += _ringOffset;
+                        for (int i = 0; i < _rings; i++)
+                        {
+                            for (var j = 0; j < amountPerRing; j++)
+                            {
+                                var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
+                                var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
+                                var x = Mathf.Cos(angle) * radius;
+                                var z = Mathf.Sin(angle) * radius;
+
+                                var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
+
+                                photonView.RPC("SetDestinationRPC", RpcTarget.All, pos, j);
+                            }
+
+                            ringOffset += _ringOffset;
+                        }
+                    }
+                    else
+                    {
+                        photonView.RPC("SetDestinationRPC", RpcTarget.All, hit.point, -1);
                     }
                 }
-                else
+                else if (unitTeam == Team.Blue)
                 {
-                    photonView.RPC("SetDestinationRPC", RpcTarget.All, hit.point, -1);
+                    if (unitsToFormation.Count > 1)
+                    {
+                        var amountPerRing = unitsToFormation.Count / _rings;
+                        var ringOffset = 2f;
+
+                        if (unitsToFormation.Count % _rings != 0)
+                        {
+                            amountPerRing++;
+                            ringOffset += _ringOffset;
+                        }
+
+                        for (int i = 0; i < _rings; i++)
+                        {
+                            for (var j = 0; j < amountPerRing; j++)
+                            {
+                                var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
+                                var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
+                                var x = Mathf.Cos(angle) * radius;
+                                var z = Mathf.Sin(angle) * radius;
+
+                                var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
+
+                                photonView.RPC("SetDestinationRPC", RpcTarget.All, pos, j);
+                            }
+
+                            ringOffset += _ringOffset;
+                        }
+                    }
+                    else
+                    {
+                        photonView.RPC("SetDestinationRPC", RpcTarget.All, hit.point, -1);
+                    }
                 }
             }
         }
