@@ -15,7 +15,7 @@ public class UnitHareketi : NetworkBehaviour
     #region Server
 
     [Command]
-    private void CmdMove(Vector3 position)
+    public void CmdMove(Vector3 position)
     {
         if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas))
         {
@@ -28,8 +28,6 @@ public class UnitHareketi : NetworkBehaviour
     #endregion
 
     #region Client
-
-    
 
     [ClientCallback]
     void Update()
@@ -53,7 +51,7 @@ public class UnitHareketi : NetworkBehaviour
         CmdMove(hit.point);
 
     }
-
+    
     public override void OnStartAuthority()
     {
         mainCamera = Camera.main;
