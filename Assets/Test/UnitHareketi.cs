@@ -28,8 +28,7 @@ public class UnitHareketi : NetworkBehaviour
     #endregion
 
     #region Client
-
-    [ClientCallback]
+    
     void Update()
     {
         if (!isOwned)
