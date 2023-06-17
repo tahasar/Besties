@@ -17,7 +17,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     {
         GameObject unitSpawn = Instantiate(unitPrefab, unitSpawnPoint.position, unitSpawnPoint.rotation);
         
-        NetworkServer.Spawn(unitSpawn,connectionToClient);
+        NetworkServer.Spawn(unitSpawn, connectionToClient);
     }
 
     #endregion

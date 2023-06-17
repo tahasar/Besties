@@ -1,87 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class UnitMovement : NetworkBehaviour
 {
-    private Camera myCam;
 
-    [SerializeField] private NavMeshAgent myAgent = null;
+    [SerializeField] private NavMeshAgent agent = null;
 
-    public LayerMask ground;
+    public Camera mainCamera;
+    public GameObject blueUnit = null;
+    public GameObject redUnit = null;
 
-    private List<GameObject> unitsToFormation = new List<GameObject>();
-    
-    [SerializeField] private int _radius = 1;
-    [SerializeField] private int _radiusGrowthMultiplier = 0;
-    [SerializeField] private float _rotations = 1;
-    [SerializeField] private int _rings = 1;
-    [SerializeField] private float _ringOffset = 1;
-    [SerializeField] private float _nthOffset = 0;
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
 
     #region Server
 
     [Command]
-    private void CmdMove(Vector3 position)
+    public void CmdMove(Vector3 position)
     {
-        if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
 
-        myAgent.SetDestination(hit.position);
     }
-
 
     #endregion
-    // Start is called before the first frame update
-    void Start()
-    {
-        myCam = Camera.main;
-        myAgent = GetComponent<NavMeshAgent>();
-    }
 
     #region Client
-
-    [ClientCallback]
-    private void Update()
+    
+    void Update()
     {
-        if (!isOwned) { return; }
-
-        Ray ray = myCam.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if (!Physics.Raycast(ray,out RaycastHit hit,Mathf.Infinity,ground))
+        if (Input.GetKeyDown(KeyCode.N))
         {
-            return;
+            Debug.Log("Blue Unit oluşturuldu.");
+            SpawnManager.Instance.SpawnObject(blueUnit,new Vector3(0,3,-4));
         }
-        
-        if (Input.GetMouseButtonDown(1))
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            myAgent.SetDestination(hit.point);
+            Debug.Log("Red Unit oluşturuldu.");
+            SpawnManager.Instance.SpawnObject(redUnit, new Vector3(0,3,4));
         }
     }
-
-    public override void OnStartAuthority()
-    {
-        myCam = Camera.main;
-    }
+    
 
     #endregion
-    
-    [Command]
-    private void MoveUnits()
-    {
-        RaycastHit hit;
-        Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
-        {
-            myAgent.SetDestination(hit.point);
-        }
-        
-        /*
+    /*
         unitsToFormation = UnitSelections.Instance.unitsSelected;
 
         RaycastHit hit;
@@ -125,5 +94,4 @@ public class UnitMovement : NetworkBehaviour
             }
         }
         */
-    }
 }

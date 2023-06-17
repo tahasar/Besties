@@ -120,8 +120,7 @@ GameObject:
   - component: {fileID: -7411086228364076568}
   - component: {fileID: 6260485363300562693}
   - component: {fileID: 8320768401978291547}
-  - component: {fileID: 3130433882918134191}
-  - component: {fileID: 4632356859797002531}
+  - component: {fileID: 4660959630090730322}
   - component: {fileID: 592139354354449495}
   m_Layer: 8
   m_Name: BlueUnit
@@ -262,7 +261,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4295384707158050615}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d145437106bac45aab77008e4f30df, type: 3}
   m_Name: 
@@ -270,33 +269,11 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  myAgent: {fileID: -7411086228364076568}
-  ground:
-    serializedVersion: 2
-    m_Bits: 128
-  _radius: 1
-  _radiusGrowthMultiplier: 0
-  _rotations: 1
-  _rings: 1
-  _ringOffset: 1
-  _nthOffset: 0
---- !u!114 &3130433882918134191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4295384707158050615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Size: {x: 1.059726, y: 1.0064187, z: 0.98592913}
-  m_Center: {x: 0, y: 0.0032093525, z: 0}
-  m_Area: 1
-  m_AffectedAgents: 00000000
---- !u!114 &4632356859797002531
+  agent: {fileID: -7411086228364076568, guid: 2c76866b613e9b14daffb03ee0425902, type: 3}
+  mainCamera: {fileID: 0}
+  blueUnit: {fileID: 4295384707158050615}
+  redUnit: {fileID: 4295384707158050615, guid: 2c76866b613e9b14daffb03ee0425902, type: 3}
+--- !u!114 &4660959630090730322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
