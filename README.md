@@ -46,7 +46,7 @@
 
 **Daily Scrum**: Daily scrumlar final döneminde olduğumuzdan ötürü her gün yapmasak da 2-3 günde bir muhakkak yapıldı. Yapılan toplantılara ait ekran görüntüleri aşağıdaki linkte yer almaktadır.
 
-https://docs.google.com/document/d/1nWqjy8pCMN9zjJdEOUI6qjtkbfp0CryeAvcoe2r9thQ/edit?usp=sharing 
+[Link](https://docs.google.com/document/d/1nWqjy8pCMN9zjJdEOUI6qjtkbfp0CryeAvcoe2r9thQ/edit?usp=sharing)
 
 **Sprint board screenshotları**:
 ![image](https://github.com/tahasar/Besties/assets/119886364/6f750814-56ed-43d3-823e-46b91cccd83d)
