@@ -8,54 +8,56 @@ using UnityEngine.InputSystem;
 
 public class UnitMovement : NetworkBehaviour
 {
+    [SerializeField] private Camera mainCamera;
+    public NavMeshAgent myAgent;
+    
+    [SerializeField] private List<GameObject> unitsToFormation = new List<GameObject>();
+    [SerializeField] private int ground;
+    [SerializeField] private int _rings = 1;
+    [SerializeField] private float _ringOffset = 2;
+    [SerializeField] private int _rotations = 1;
+    [SerializeField] private int _radiusGrowthMultiplier = 1;
+    [SerializeField] private float _radius = 5;
+    [SerializeField] private float _nthOffset = 1;
 
-    [SerializeField] private NavMeshAgent agent = null;
+    #region Singleton
 
-    public Camera mainCamera;
-    public GameObject blueUnit = null;
-    public GameObject redUnit = null;
+    private static UnitMovement _instance;
 
+    public static UnitMovement Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+    #endregion
+    
     private void Start()
     {
         mainCamera = Camera.main;
+        myAgent = GetComponent<NavMeshAgent>();
     }
 
     #region Server
 
-    [Command]
-    public void CmdMove(Vector3 position)
+    private void Update()
     {
-
-    }
-
-    #endregion
-
-    #region Client
-    
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Mouse.current.rightButton.isPressed)
         {
-            Debug.Log("Blue Unit oluşturuldu.");
-            SpawnManager.Instance.SpawnObject(blueUnit,new Vector3(0,3,-4));
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Debug.Log("Red Unit oluşturuldu.");
-            SpawnManager.Instance.SpawnObject(redUnit, new Vector3(0,3,4));
+            CmdMove();
         }
     }
-    
 
-    #endregion
+    public void CmdMove()
+    {
+        
+        myAgent = GetComponent<NavMeshAgent>();
 
-    /*
         unitsToFormation = UnitSelections.Instance.unitsSelected;
-
+        
         RaycastHit hit;
-        Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
-
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
         {
             if (unitsToFormation.Count > 1)
@@ -79,7 +81,7 @@ public class UnitMovement : NetworkBehaviour
                         var x = Mathf.Cos(angle) * radius;
                         var z = Mathf.Sin(angle) * radius;
 
-                        var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
+                        var pos = new Vector3(hit.point.x + x, unitsToFormation[j].transform.position.y, hit.point.z + z);
 
 
                         unitsToFormation[j].GetComponent<NavMeshAgent>().SetDestination(pos);
@@ -92,6 +94,9 @@ public class UnitMovement : NetworkBehaviour
             {
                 myAgent.SetDestination(hit.point);
             }
+            
         }
-        */
+    }
+
+    #endregion
 }

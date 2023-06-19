@@ -30,10 +30,10 @@ public class SpawnManager : NetworkBehaviour
 
     #endregion
 
-    [Command]
-    public void SpawnObject(GameObject objectToSpawn,Vector3 spawnPosition)
-    {
-        GameObject spawnedObject = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
-        NetworkServer.Spawn(spawnedObject, connectionToClient);
-    }
+    //[Command]
+    //public void SpawnObject(GameObject objectToSpawn,Vector3 spawnPosition)
+    //{
+    //    GameObject spawnedObject = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+    //    NetworkServer.Spawn(spawnedObject, connectionToClient);
+    //}
 }

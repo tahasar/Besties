@@ -231,9 +231,9 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 1
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4295384707158050615}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d145437106bac45aab77008e4f30df, type: 3}
   m_Name: 
@@ -269,10 +269,16 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  agent: {fileID: -7411086228364076568}
   mainCamera: {fileID: 0}
-  blueUnit: {fileID: 0}
-  redUnit: {fileID: 0}
+  myAgent: {fileID: 0}
+  unitsToFormation: []
+  ground: 7
+  _rings: 1
+  _ringOffset: 2
+  _rotations: 1
+  _radiusGrowthMultiplier: 0
+  _radius: 5
+  _nthOffset: 0
 --- !u!114 &-3520996649968558252
 MonoBehaviour:
   m_ObjectHideFlags: 0
