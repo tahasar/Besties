@@ -52,6 +52,7 @@ https://docs.google.com/document/d/1nWqjy8pCMN9zjJdEOUI6qjtkbfp0CryeAvcoe2r9thQ/
 
 
 **Ürün Durumu**: 
+
 ![Replay_2023-06-19_09-22-09_AdobeExpress](https://github.com/tahasar/Besties/assets/119886364/2e9f87d6-9332-41d7-889e-856b9adaa582)
 
 
