@@ -35,7 +35,7 @@
 • 15-60 yaş arası kullanıcılar
 
 ### Product Backlog URL
-• [Miro Board]([https://www.google.com](https://miro.com/welcomeonboard/alBFSHM1MXJOV3l5anVHQ1dXNjhZVnhVelNmZkp1VTFQakVNZmxKcVM1VHh3eFVyQUVJWDFJTUNoZUtYWFpvNHwzNDU4NzY0NTUxMTE4NjA3MDQ2fDI=?share_link_id=117085155290))
+• [Miro Board]([https://www.google.com](https://miro.com/welcomeonboard/alBFSHM1MXJOV3l5anVHQ1dXNjhZVnhVelNmZkp1VTFQakVNZmxKcVM1VHh3eFVyQUVJWDFJTUNoZUtYWFpvNHwzNDU4NzY0NTUxMTE4NjA3MDQ2fDI=?share_link_id=117085155290)
 
 ## Sprint 1
 **Sprint Notları**: Product Backlog linki içerisinde yapılan toplantılarda neler konuşulduğuna, fikrin nasıl geliştirildiğine dair her şey bulunmaktadır.
