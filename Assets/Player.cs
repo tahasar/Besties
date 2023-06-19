@@ -25,19 +25,27 @@ public class Player : NetworkBehaviour
 
         if (players.Length == 1)
         {
-            Debug.Log("0 oyuncu vardı ve blue renk verildi.");
+            Debug.Log("1 oyuncu vardı ve blue renk verildi.");
             team = Team.Blue;
         }
         else if (players.Length == 2)
         {
             if (players[0].team == Team.Blue)
             {
-                Debug.Log("2  oyuncu vardı ve blue renk verildi.");
+                Debug.Log("2  oyuncu vardı ve red renk verildi.");
                 team = Team.Red;
             }else if (players[0].team == Team.Red)
             {
-                Debug.Log("2  oyuncu vardı ve red renk verildi.");
+                foreach (GameObject unit in UnitSelections.Instance.unitsSelected)
+                {
+                    if (unit.GetComponent<Unit>().team == Team.Blue)
+                    {
+                        
+                    }
+                }
+                Debug.Log("2  oyuncu vardı ve blue renk verildi.");
                 team = Team.Blue;
+                
             }
         }
     }
