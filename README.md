@@ -35,10 +35,10 @@
 • 15-60 yaş arası kullanıcılar
 
 ### Product Backlog URL
-• [Miro Board](https://miro.com/welcomeonboard/alBFSHM1MXJOV3l5anVHQ1dXNjhZVnhVelNmZkp1VTFQakVNZmxKcVM1VHh3eFVyQUVJWDFJTUNoZUtYWFpvNHwzNDU4NzY0NTUxMTE4NjA3MDQ2fDI=?share_link_id=117085155290)
+• [Trello Backlog Board](https://trello.com/invite/b/w0ZU2VgF/ATTI9abfdcd6e096e84e8701551700e78532747DB7E3/product-backlog).
 
 ## Sprint 1
-**Sprint Notları**: Product Backlog linki içerisinde yapılan toplantılarda neler konuşulduğuna, fikrin nasıl geliştirildiğine dair her şey bulunmaktadır.
+**Sprint Notları**:  User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir. 
 
 **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
 
