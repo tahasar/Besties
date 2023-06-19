@@ -1,7 +1,7 @@
-### Team Name
+### Takım İsmi
 • Bestie's
-## About Project
-### Team Members
+
+### Takım Üyeleri
 • **Taha Asar**: *Product Owner*
 
 • **Eda Aktaş**: *Scrum Master*
@@ -12,20 +12,20 @@
 
 • **İrem Tekcan**: *Team Member/Developer*
 
-### Project Name
+### Ürün İsmi
 • PATOWAR
 
-### Description
+### Ürün Açıklaması
 • PATOWAR, vücudumuzda varolan yararlı ve zararlı mikroorganizmaların birbiriyle olan savaşını deneyimleyeceğiniz bir oyun.
 
-### Project Characteristics
+### Ürün Özellikleri
 • Multiplayer
 
 • RTS
 
 • Eğitici
 
-### Target Audience
+### Hedef Kitle
 • Biyoloji severler
 
 • Strateji severler
@@ -39,6 +39,7 @@
 
 ## Sprint 1
 **Sprint Notları**: Product Backlog linki içerisinde yapılan toplantılarda neler konuşulduğuna, fikrin nasıl geliştirildiğine dair her şey bulunmaktadır.
+
 **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
 
 **Puan tamamlama mantığı**: Her bir göreve önemine göre yıldızlar verilmiş. Bir yıldız 6 puan değerindedir. Her bir sprintin 100 puan olması gerektiğini düşünürek toplam puanımız 300'dür.
