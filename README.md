@@ -54,6 +54,8 @@ https://docs.google.com/document/d/1nWqjy8pCMN9zjJdEOUI6qjtkbfp0CryeAvcoe2r9thQ/
 **Ürün Durumu**: 
 
 ![Replay_2023-06-19_09-22-09_AdobeExpress](https://github.com/tahasar/Besties/assets/119886364/2e9f87d6-9332-41d7-889e-856b9adaa582)
+![image](https://github.com/tahasar/Besties/assets/119886364/d849b032-4ea8-4c38-b507-3cb563ad3fd7)
+![image](https://github.com/tahasar/Besties/assets/119886364/973a5dd3-527c-4c19-8ba1-54bb3eee7958)
 
 
 **Ekran görüntüleri**: 
