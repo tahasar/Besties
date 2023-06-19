@@ -16,34 +16,48 @@
 • PATOWAR
 
 ### Description
-• PATOWAR is a game where you will experience the war between beneficial and harmful microorganisms in our body.
+• PATOWAR, vücudumuzda varolan yararlı ve zararlı mikroorganizmaların birbiriyle olan savaşını deneyimleyeceğiniz bir oyun.
 
 ### Project Characteristics
 • Multiplayer
 
 • RTS
 
-• Educational
+• Eğitici
 
 ### Target Audience
-• Biology lovers
+• Biyoloji severler
 
-• Strategy lovers
+• Strateji severler
 
-• Competitive people
+• Rekabetçi kişiler
 
-• Users aged 15-60 years
+• 15-60 yaş arası kullanıcılar
 
 ### Product Backlog URL
-• -----------
+• https://miro.com/welcomeonboard/alBFSHM1MXJOV3l5anVHQ1dXNjhZVnhVelNmZkp1VTFQakVNZmxKcVM1VHh3eFVyQUVJWDFJTUNoZUtYWFpvNHwzNDU4NzY0NTUxMTE4NjA3MDQ2fDI=?share_link_id=117085155290
 
 ## Sprint 1
-### Sprint Notları
-Sprint içinde tamamlanması tahmin edilen puan
-Puan tamamlama mantığı
-Daily Scrum
-Sprint board screenshotları
-Ürün Durumu
-Ekran görüntüleri
-Sprint Review
-Sprint Retrospective
+**Sprint Notları**: Product Backlog linki içerisinde yapılan toplantılarda neler konuşulduğuna, fikrin nasıl geliştirildiğine dair her şey bulunmaktadır.
+**Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
+
+**Puan tamamlama mantığı**: Her bir göreve önemine göre yıldızlar verilmiş. Bir yıldız 6 puan değerindedir. Her bir sprintin 100 puan olması gerektiğini düşünürek toplam puanımız 300'dür.
+
+**Daily Scrum**: Daily scrumlar final döneminde olduğumuzdan ötürü her gün yapmasak da 2-3 günde bir muhakkak yapıldı. Yapılan toplantılara ait ekran görüntüleri aşağıdaki linkte yer almaktadır.
+
+https://docs.google.com/document/d/1nWqjy8pCMN9zjJdEOUI6qjtkbfp0CryeAvcoe2r9thQ/edit?usp=sharing 
+
+**Sprint board screenshotları**:
+![image](https://github.com/tahasar/Besties/assets/119886364/6f750814-56ed-43d3-823e-46b91cccd83d)
+
+
+**Ürün Durumu**: 
+![Replay_2023-06-19_09-22-09_AdobeExpress](https://github.com/tahasar/Besties/assets/119886364/2e9f87d6-9332-41d7-889e-856b9adaa582)
+
+
+**Ekran görüntüleri**: 
+![image](https://github.com/tahasar/Besties/assets/119886364/1887af0f-03ae-4b3b-ba74-0f44ee450ae7)
+
+**Sprint Review**: Fikir bulma aşamasında çok fazla zorluk yaşanmadı. Ancak oyunumuzun özgün bir değer taşımasından ötürü ekipçe oyun dinamikleri tam olarak anlaşılana ve karar verilene kadar sık sık toplantılar yapıldı. Multiplayer yapılması planlandığından ötürü developerlar bu alana yoğunlaştı ve multiplayer base çalışır hale getirildi. 96 puan ile ilk sprinti tamamladık.
+
+**Sprint Retrospective**: Ekibimiz kaynaştı ve iletişimde şuana kadar herhangi bir sıkıntı yaşamadık. Ekip final haftası olması sebebiyle çok vakit ayıramamıştır. Ancak 2. sprintte bu açığın kapanması planlanmaktadır.
