@@ -1,80 +1,137 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 
-public class UnitMovement : MonoBehaviour
+public class UnitMovement : NetworkBehaviour
 {
-    private Camera myCam;
+    [SerializeField] private Camera mainCamera;
+    public NavMeshAgent myAgent;
 
-    private NavMeshAgent myAgent;
-
-    public LayerMask ground;
-
-    private List<GameObject> unitsToFormation = new List<GameObject>();
-    
-    [SerializeField] private int _radius = 1;
-    [SerializeField] private int _radiusGrowthMultiplier = 0;
-    [SerializeField] private float _rotations = 1;
+    [SerializeField] private List<GameObject> unitsToFormation = new List<GameObject>();
+    [SerializeField] private int ground;
     [SerializeField] private int _rings = 1;
-    [SerializeField] private float _ringOffset = 1;
-    [SerializeField] private float _nthOffset = 0;
+    [SerializeField] private float _ringOffset = 2;
+    [SerializeField] private int _rotations = 1;
+    [SerializeField] private int _radiusGrowthMultiplier = 1;
+    [SerializeField] private float _radius = 5;
+    [SerializeField] private float _nthOffset = 1;
 
-    // Start is called before the first frame update
-    void Start()
+    #region Singleton
+
+    private static UnitMovement _instance;
+
+    public static UnitMovement Instance
     {
-        myCam = Camera.main;
+        get { return _instance; }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
+    #endregion
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
         myAgent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    #region Server
+    
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (!isOwned)
         {
-            unitsToFormation = UnitSelections.Instance.unitsSelected;
-            
-            RaycastHit hit;
-            Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity,ground))
+            return;
+        }
+        
+        if (Mouse.current.rightButton.isPressed)
+        {
+            if (isServer)
             {
-                if (unitsToFormation.Count > 1)
-                {
-                    var amountPerRing = unitsToFormation.Count / _rings;
-                    var ringOffset = 2f;
-                    
-                    if (unitsToFormation.Count % _rings != 0)
-                    {
-                        amountPerRing++;
-                        ringOffset += _ringOffset;
-                    }
-                    
-                    for (int i = 0; i < _rings; i++) {
-                        
-                        for (var j = 0; j < amountPerRing; j++)
-                        {
-                            var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
-
-                            var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
-                            var x = Mathf.Cos(angle) * radius;
-                            var z = Mathf.Sin(angle) * radius;
-
-                            var pos = new Vector3(hit.point.x + x, 0, hit.point.z + z);
-                            
-                            unitsToFormation[j].GetComponent<NavMeshAgent>().SetDestination(pos);
-                        }
-
-                        ringOffset += _ringOffset;
-                    }
-                }
-                else
-                {
-                    myAgent.SetDestination(hit.point);
-                }
+                MoveUnits();
+            }
+            else
+            {
+                CmdMoveUnits();
             }
         }
+
+        // Eğer agent hedefe ulaşırsa, destination'ı sıfırlar.(Sürekli destination'a gitme işlemini bitirir)
+        if (Vector3.Distance(transform.position, myAgent.destination) < myAgent.baseOffset + 0.0001) 
+        {
+            myAgent.ResetPath();
+        }
+    }
+    #endregion
+
+    [Command]
+    public void CmdMoveUnits()
+    {
+        MoveUnits();
+    }
+    
+    public void MoveUnits()
+    {
+        myAgent = GetComponent<NavMeshAgent>();
+
+        unitsToFormation = UnitSelections.Instance.unitsSelected;
+
+        RaycastHit hit;
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
+        {
+            if (unitsToFormation.Count > 1)
+            {
+                var amountPerRing = unitsToFormation.Count / _rings;
+                var ringOffset = 2f;
+
+                if (unitsToFormation.Count % _rings != 0)
+                {
+                    amountPerRing++;
+                    ringOffset += _ringOffset;
+                }
+
+                for (int i = 0; i < _rings; i++)
+                {
+                    for (var j = 0; j < amountPerRing; j++)
+                    {
+                        var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
+
+                        var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
+                        var x = Mathf.Cos(angle) * radius;
+                        var z = Mathf.Sin(angle) * radius;
+
+                        var pos = new Vector3(hit.point.x + x, unitsToFormation[j].transform.position.y,
+                            hit.point.z + z);
+                        Debug.Log(pos);
+
+
+                        unitsToFormation[j].GetComponent<NavMeshAgent>().SetDestination(pos);
+                    }
+
+                    ringOffset += _ringOffset;
+                }
+            }
+            else
+            {
+                
+                myAgent.SetDestination(new Vector3(hit.point.x,myAgent.transform.position.y,hit.point.z));
+                Debug.Log(hit.point.x + " " + myAgent.transform.position.y+ " "+hit.point.z);
+            }
+
+        }
+    }
+
+    public override void OnStartAuthority()
+    {
+        mainCamera = Camera.main;
     }
 }
