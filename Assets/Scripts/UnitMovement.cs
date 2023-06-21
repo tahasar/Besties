@@ -42,6 +42,11 @@ public class UnitMovement : NetworkBehaviour
 
     private void Update()
     {
+        if (!isOwned)
+        {
+            return;
+        }
+        
         if (Mouse.current.rightButton.isPressed)
         {
             CmdMove();
@@ -50,7 +55,6 @@ public class UnitMovement : NetworkBehaviour
 
     public void CmdMove()
     {
-        
         myAgent = GetComponent<NavMeshAgent>();
 
         unitsToFormation = UnitSelections.Instance.unitsSelected;

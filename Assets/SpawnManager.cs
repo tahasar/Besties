@@ -2,31 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class SpawnManager : NetworkBehaviour
+public class SpawnManager : NetworkBehaviour, IPointerClickHandler
 {
-    
-    GameObject objectToSpawn = null;
-    Vector3? spawnPosition = null;
-    
-    //#region Singleton
-//
-    //private static SpawnManager _instance;
-    //public static SpawnManager Instance { get { return _instance; } }
-//
-    //private void Awake()
-    //{ 
-    //    _instance = this;
-    //}
-//
-    //#endregion
+    private IPointerClickHandler _pointerClickHandlerImplementation;
 
-    //[Command]
-    //public void SpawnObject(GameObject objectToSpawn,Vector3 spawnPosition)
-    //{
-    //    GameObject spawnedObject = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
-    //    NetworkServer.Spawn(spawnedObject, connectionToClient);
-    //}
+    [SerializeField] private GameObject unitPrefab = null;
+    [SerializeField] private Transform unitSpawnPoint = null;
+
+    [Command]
+    private void CmdSpawnUnit()
+    {
+        Debug.Log("ara");
+        GameObject unitSpawn = Instantiate(unitPrefab, unitSpawnPoint.position, unitSpawnPoint.rotation);
+
+        NetworkServer.Spawn(unitSpawn, connectionToClient);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button != PointerEventData.InputButton.Left)
+        {
+            return;
+        }
+
+        if (!isOwned)
+        {
+            return;
+        }
+        
+        CmdSpawnUnit();
+    }
 }
