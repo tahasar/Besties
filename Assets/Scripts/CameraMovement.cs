@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public static CameraMovement instance;
+    public static CameraMovement Instance;
     public float normalSpeed;
     public float fastSpeed;
     public float movementSpeed = 0.0035f;
@@ -27,7 +27,7 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
+        Instance = this;
         newPosition = transform.position;
         newRotation = transform.rotation;
         newZoom = cameraTransform.localPosition;
