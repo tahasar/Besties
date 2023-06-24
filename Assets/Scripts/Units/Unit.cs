@@ -11,6 +11,15 @@ public class Unit : NetworkBehaviour
     [SerializeField] private Targeter targeter = null;
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselect = null;
+    
+    // Health and Attack Stats
+    [SerializeField] private int maxHealth = 100;
+    [SyncVar(hook = nameof(HandleHealthUpdated))] private int currentHealth;
+
+    [SerializeField] private int attackDamage = 10;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float attackCooldown = 1f;
+    private float lastAttackTime = 0f;
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;
@@ -21,20 +30,60 @@ public class Unit : NetworkBehaviour
 
     public override void OnStartServer()
     {
+        currentHealth = maxHealth;
         ServerOnUnitSpawned?.Invoke(this);
     }
 
     public override void OnStopServer()
     {
         ServerOnUnitDespawned?.Invoke(this);
-
     }
+
+    [Server]
+    public void DealDamage(Unit target)
+    {
+        if (target == null || !target.hasAuthority)
+            return;
+        
+        if (!CanAttack())
+            return;
+        
+        target.TakeDamage(attackDamage);
+        lastAttackTime = Time.time;
+    }
+
+    [Server]
+    private void TakeDamage(int damageAmount)
+    {
+        if (currentHealth <= 0)
+            return;
+        
+        currentHealth -= damageAmount;
+        
+        if (currentHealth <= 0)
+        {
+            // Unit destroyed
+            NetworkServer.Destroy(gameObject);
+        }
+    }
+
+    private void HandleHealthUpdated(int oldValue, int newValue)
+    {
+        // Health update logic
+    }
+
+    private bool CanAttack()
+    {
+        return Time.time - lastAttackTime >= attackCooldown;
+    }
+
     #endregion
+
     public UnitMovement GetUnitMovement()
     {
         return unitMovement;
     }
-    
+
     public Targeter GetTargeter()
     {
         return targeter;
@@ -48,16 +97,17 @@ public class Unit : NetworkBehaviour
         {
             return;
         }
+
         AuthorityOnUnitSpawned?.Invoke(this);
     }
-    
+
     public override void OnStopClient()
     {
         if (!isClientOnly || !isOwned)
         {
             return;
         }
-        
+
         AuthorityOnUnitDespawned?.Invoke(this);
     }
 
@@ -65,7 +115,7 @@ public class Unit : NetworkBehaviour
     {
         if (!isOwned)
             return;
-        
+
         onSelected?.Invoke();
     }
 
@@ -73,7 +123,7 @@ public class Unit : NetworkBehaviour
     {
         if (!isOwned)
             return;
-        
+
         onDeselect?.Invoke();
     }
 
