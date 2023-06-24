@@ -31,6 +31,8 @@ public class CameraMovement : MonoBehaviour
         newPosition = transform.position;
         newRotation = transform.rotation;
         newZoom = cameraTransform.localPosition;
+        
+        
     }
 
     // Update is called once per frame
@@ -111,22 +113,22 @@ public class CameraMovement : MonoBehaviour
         
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            newPosition += (transform.right * movementSpeed);
+            newPosition += (transform.forward * movementSpeed);
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            newPosition += (transform.right * -movementSpeed);
+            newPosition += (transform.forward * -movementSpeed);
         }
         
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            newPosition += (transform.forward * -movementSpeed);
+            newPosition += (transform.right * movementSpeed);
         }
         
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            newPosition += (transform.forward * movementSpeed);
+            newPosition += (transform.right * -movementSpeed);
         }
 
         if (Input.GetKey(KeyCode.Q))

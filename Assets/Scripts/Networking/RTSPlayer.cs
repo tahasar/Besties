@@ -7,6 +7,11 @@ public class RTSPlayer : NetworkBehaviour
 {
     [SerializeField] private List<Unit> myUnits = new List<Unit>();
 
+    public List<Unit> GetMyUnits()
+    {
+        return myUnits;
+    }
+
     #region Server
 
     public override void OnStartServer()
@@ -21,17 +26,17 @@ public class RTSPlayer : NetworkBehaviour
         Unit.ServerOnUnitDespawned -= ServerHandleUnitDespawned;
     }
 
-    void ServerHandleUnitSpawned(Unit unit)
+    private void ServerHandleUnitSpawned(Unit unit)
     {
-        if(unit.connectionToClient.connectionId != connectionToClient.connectionId) {return;}
-        
+        if (unit.connectionToClient.connectionId != connectionToClient.connectionId) { return; }
+
         myUnits.Add(unit);
     }
-    
-    void ServerHandleUnitDespawned(Unit unit)
+
+    private void ServerHandleUnitDespawned(Unit unit)
     {
-        if(unit.connectionToClient.connectionId != connectionToClient.connectionId) {return;}
-        
+        if (unit.connectionToClient.connectionId != connectionToClient.connectionId) { return; }
+
         myUnits.Remove(unit);
     }
 
@@ -41,41 +46,32 @@ public class RTSPlayer : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        if (!isClientOnly)
-        {
-            return;
-        }
-        
-        Unit.AuthorityOnUnitSpawned += AuthorityOnUnitSpawned;
-        Unit.AuthorityOnUnitDespawned += AuthorityOnUnitDespawned;
+        if (!isClientOnly) { return; }
+
+        Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
+        Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
     }
 
     public override void OnStopClient()
     {
-        if (!isClientOnly)
-        {
-            return;
-        }
-        
-        Unit.AuthorityOnUnitSpawned -= AuthorityOnUnitSpawned;
-        Unit.AuthorityOnUnitDespawned -= AuthorityOnUnitDespawned;
+        if (!isClientOnly) { return; }
+
+        Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
+        Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
     }
-    
-    void AuthorityOnUnitSpawned(Unit unit)
+
+    private void AuthorityHandleUnitSpawned(Unit unit)
     {
-        if (!isOwned)
-        {
-            return;
-        }
+        if (!isOwned) { return; }
+        
+
         myUnits.Add(unit);
     }
-    
-    void AuthorityOnUnitDespawned(Unit unit)
+
+    private void AuthorityHandleUnitDespawned(Unit unit)
     {
-        if (!isOwned)
-        {
-            return;
-        }
+        if (!isOwned) { return; }
+
         myUnits.Remove(unit);
     }
 

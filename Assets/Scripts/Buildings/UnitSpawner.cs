@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
@@ -22,17 +24,18 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     #endregion
 
     #region Client
+    
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left) {return;}
-
-        if (!isOwned)
+        if(eventData.button == PointerEventData.InputButton.Left)
         {
-            return;
+            if (!isOwned)
+            {
+                return;
+            }
+            CmdSpawnUnit();
         }
-        
-        CmdSpawnUnit();
     }
 
     #endregion
