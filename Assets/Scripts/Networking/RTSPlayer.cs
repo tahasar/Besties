@@ -5,11 +5,23 @@ using UnityEngine;
 
 public class RTSPlayer : NetworkBehaviour
 {
+    private Color teamColor = new Color();
     [SerializeField] private List<Unit> myUnits = new List<Unit>();
 
+    public Color GetTeamColor()
+    {
+        return teamColor;
+    }
+    
     public List<Unit> GetMyUnits()
     {
         return myUnits;
+    }
+    
+    [Server]
+    public void SetTeamColor(Color newTeamColor)
+    {
+        teamColor = newTeamColor;
     }
 
     #region Server

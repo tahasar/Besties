@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 971710601100915288}
   - component: {fileID: 2763631813735938526}
   - component: {fileID: 6191759957411741188}
+  - component: {fileID: 4452264916350941850}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -442,6 +443,7 @@ MonoBehaviour:
   syncInterval: 0
   agent: {fileID: 6275116007305140191}
   targeter: {fileID: 6191759957411741188}
+  chaseRange: 10
 --- !u!114 &971710601100915288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,6 +491,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  maxHealth: 100
+  attackDamage: 10
+  attackRange: 2
+  attackCooldown: 1
 --- !u!114 &2763631813735938526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +527,23 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 0}
+--- !u!114 &4452264916350941850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5450777422561193662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11180e8b1b14e844a2af2b3b7473d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  colorRenderers:
+  - {fileID: 7542607746440757646}
 --- !u!1 &6358023350793200940
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +725,11 @@ PrefabInstance:
       addedObject: {fileID: 5617274301925912738}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a9577f5f2d86584eb9eb6c6c8759006, type: 3}
+--- !u!23 &7542607746440757646 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 0a9577f5f2d86584eb9eb6c6c8759006, type: 3}
+  m_PrefabInstance: {fileID: 9182044047916965130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8712095920569318113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0a9577f5f2d86584eb9eb6c6c8759006, type: 3}

@@ -7,6 +7,7 @@ public class RTSNetworkManager : NetworkManager
 {
     [SerializeField] private GameObject unitSpawnerPrefab = null;
     
+    
     public override void OnClientConnect()
     {
         base.OnClientConnect();
@@ -18,6 +19,14 @@ public class RTSNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(connection);
 
+        RTSPlayer player = connection.identity.GetComponent<RTSPlayer>();
+        
+        player.SetTeamColor(new Color(
+            Random.Range(0f, 1f), 
+            Random.Range(0f, 1f), 
+            Random.Range(0f, 1f)));
+        
+        
         GameObject unitSpawnerInstantiate = Instantiate(
             unitSpawnerPrefab,
             connection.identity.transform.position,
