@@ -61,7 +61,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 8991012099112835682, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+  - {fileID: 5450777422561193662, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
   - {fileID: 2499350260481038571, guid: 59c0eecf74215344b8e1294ec5358c2c, type: 3}
   - {fileID: 2127669179619683225, guid: 658227035a3050447914f084ff670865, type: 3}
   - {fileID: 2328956231415853501, guid: d730143f895b7124ab0eeca64ad96e4e, type: 3}
@@ -77,7 +77,7 @@ MonoBehaviour:
     deliveryTimeEmaDuration: 2
   timeInterpolationGui: 0
   unitSpawnerPrefab: {fileID: 2499350260481038571, guid: 59c0eecf74215344b8e1294ec5358c2c, type: 3}
-  gameOverHandler: {fileID: 127690731221064829, guid: 05011d83726780947ac75eb76cb60339, type: 3}
+  gameOverHandler: {fileID: -1406201822768653583, guid: 05011d83726780947ac75eb76cb60339, type: 3}
 --- !u!114 &618757990556727914
 MonoBehaviour:
   m_ObjectHideFlags: 0

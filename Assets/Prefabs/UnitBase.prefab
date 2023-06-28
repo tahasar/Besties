@@ -75,7 +75,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   health: {fileID: 2735623778853129030}
-  unitPrefab: {fileID: 8991012099112835682, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+  unitPrefab: {fileID: 5450777422561193662, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
   unitSpawnPoint: {fileID: 1260902266141626590}
 --- !u!65 &5319930599081268659
 BoxCollider:
