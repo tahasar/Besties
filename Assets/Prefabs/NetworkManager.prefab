@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5188007948589800361
 MonoBehaviour:
@@ -52,17 +52,19 @@ MonoBehaviour:
   autoConnectClientBuild: 0
   sendRate: 30
   offlineScene: Assets/Scenes/MenuScene.unity
-  onlineScene: Assets/Scenes/MainScene.unity
+  onlineScene: Assets/Scenes/Scene_Map.unity
   transport: {fileID: 618757990556727914}
   networkAddress: localhost
-  maxConnections: 100
+  maxConnections: 4
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 5859480281317238225, guid: 088579ace7f15294f8af7eec61f68315, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 5450777422561193662, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
-  - {fileID: 108029920511099980, guid: 59c0eecf74215344b8e1294ec5358c2c, type: 3}
+  - {fileID: 8991012099112835682, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+  - {fileID: 2499350260481038571, guid: 59c0eecf74215344b8e1294ec5358c2c, type: 3}
+  - {fileID: 2127669179619683225, guid: 658227035a3050447914f084ff670865, type: 3}
+  - {fileID: 2328956231415853501, guid: d730143f895b7124ab0eeca64ad96e4e, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     catchupNegativeThreshold: -1
@@ -74,7 +76,8 @@ MonoBehaviour:
     dynamicAdjustmentTolerance: 1
     deliveryTimeEmaDuration: 2
   timeInterpolationGui: 0
-  unitSpawnerPrefab: {fileID: 108029920511099980, guid: 59c0eecf74215344b8e1294ec5358c2c, type: 3}
+  unitSpawnerPrefab: {fileID: 2499350260481038571, guid: 59c0eecf74215344b8e1294ec5358c2c, type: 3}
+  gameOverHandler: {fileID: 127690731221064829, guid: 05011d83726780947ac75eb76cb60339, type: 3}
 --- !u!114 &618757990556727914
 MonoBehaviour:
   m_ObjectHideFlags: 0

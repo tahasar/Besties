@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
@@ -12,41 +11,47 @@ public class UnitFiring : NetworkBehaviour
     [SerializeField] private float fireRange = 5f;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float rotationSpeed = 20f;
-    
+
     private float lastFireTime;
-    
-    #region Server
 
     [ServerCallback]
     private void Update()
     {
-        if (!CanFireAtTarget())
-            return;
-        Quaternion targetRotation = Quaternion.LookRotation
-            (targeter.GetTarget().transform.position - transform.position);
-        
-        transform.rotation = Quaternion.RotateTowards
-            (transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Targetable target = targeter.GetTarget();
 
-        if (!(Time.time > (1 / fireRate) + lastFireTime))
+        if (target == null) { return; }
+        Debug.Log("target is not null");
+
+        if (!CanFireAtTarget()) { return; }
+        Debug.Log("can fire at target");
+
+        Quaternion targetRotation =
+            Quaternion.LookRotation(target.transform.position - transform.position);
+        Debug.Log("target rotation");
+
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Debug.Log("transform rotation");
+
+        if (Time.time > (1 / fireRate) + lastFireTime)
         {
-            Quaternion projectileRotation = Quaternion.LookRotation
-                (targeter.GetTarget().GetAimAtPoint().position - projectileSpawnPoint.position);
-            
-            GameObject projectileInstance = Instantiate
-                (projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-            
+            Debug.Log("time is greater than fire rate");
+            Quaternion projectileRotation = Quaternion.LookRotation(
+                target.GetAimAtPoint().position - projectileSpawnPoint.position);
+
+            GameObject projectileInstance = Instantiate(
+                projectilePrefab, projectileSpawnPoint.position, projectileRotation);
+
             NetworkServer.Spawn(projectileInstance, connectionToClient);
-            
+
             lastFireTime = Time.time;
         }
     }
-    
+
     [Server]
     private bool CanFireAtTarget()
     {
-        return false;
+        return (targeter.transform.position - transform.position).sqrMagnitude
+               <= fireRange * fireRange;
     }
-    
-    #endregion
 }

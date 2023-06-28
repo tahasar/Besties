@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class Unit : NetworkBehaviour
 {
+    [SerializeField] private Health health = null;
     [SerializeField] private UnitMovement unitMovement = null;
     [SerializeField] private Targeter targeter = null;
     [SerializeField] private HealthBar _healthbar;
@@ -26,6 +27,7 @@ public class Unit : NetworkBehaviour
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;
+    
     public static event Action<Unit> AuthorityOnUnitSpawned;
     public static event Action<Unit> AuthorityOnUnitDespawned;
 
@@ -36,17 +38,27 @@ public class Unit : NetworkBehaviour
         currentHealth = maxHealth;
         //_healthbar.UpdateHealthBar(maxHealth,currentHealth);
         ServerOnUnitSpawned?.Invoke(this);
+        
+        health.ServerOnDie += ServerHandleDie;
     }
 
     public override void OnStopServer()
     {
+        health.ServerOnDie -= ServerHandleDie;
+        
         ServerOnUnitDespawned?.Invoke(this);
+    }
+    
+    [Server]
+    private void ServerHandleDie()
+    {
+        NetworkServer.Destroy(gameObject);
     }
 
     [Server]
     public void DealDamage(Unit target)
     {
-        if (target == null || !target.hasAuthority)
+        if (target == null || !target.isOwned)
             return;
         
         if (!CanAttack())
@@ -98,19 +110,15 @@ public class Unit : NetworkBehaviour
 
     #region Client
 
-    public override void OnStartClient()
+    public override void OnStartAuthority()
     {
-        if (!isClientOnly || !isOwned)
-        {
-            return;
-        }
 
         AuthorityOnUnitSpawned?.Invoke(this);
     }
 
     public override void OnStopClient()
     {
-        if (!isClientOnly || !isOwned)
+        if (!isOwned)
         {
             return;
         }
