@@ -9,9 +9,10 @@ public class Unit : NetworkBehaviour
 {
     [SerializeField] private UnitMovement unitMovement = null;
     [SerializeField] private Targeter targeter = null;
+    [SerializeField] private HealthBar _healthbar;
+
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselect = null;
-    
     // Health and Attack Stats
     [SerializeField] private int maxHealth = 100;
     [SyncVar(hook = nameof(HandleHealthUpdated))] private int currentHealth;
@@ -20,6 +21,8 @@ public class Unit : NetworkBehaviour
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1f;
     private float lastAttackTime = 0f;
+
+    [SerializeField] private string unitName;
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;
@@ -31,6 +34,7 @@ public class Unit : NetworkBehaviour
     public override void OnStartServer()
     {
         currentHealth = maxHealth;
+        //_healthbar.UpdateHealthBar(maxHealth,currentHealth);
         ServerOnUnitSpawned?.Invoke(this);
     }
 
@@ -65,11 +69,14 @@ public class Unit : NetworkBehaviour
             // Unit destroyed
             NetworkServer.Destroy(gameObject);
         }
+
+        
     }
 
     private void HandleHealthUpdated(int oldValue, int newValue)
     {
-        // Health update logic
+        //_healthbar.UpdateHealthBar(maxHealth,currentHealth);
+
     }
 
     private bool CanAttack()
