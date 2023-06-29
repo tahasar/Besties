@@ -12,6 +12,7 @@ public class HealthBar : MonoBehaviour
     void Start(){
         _cam = Camera.main;
     }
+    
     [SerializeField] private Image _healthbarSprite;
     // Start is called before the first frame update
     public void UpdateHealthBar(float maxHealth, float currentHealth){
