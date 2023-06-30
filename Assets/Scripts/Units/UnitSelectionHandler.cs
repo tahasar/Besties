@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
@@ -20,16 +21,16 @@ public class UnitSelectionHandler : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        
+
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
+        GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
     }
 
     private void OnDestroy()
     {
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
+        GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
     }
-
-    
 
     private void Update()
     {
@@ -54,8 +55,7 @@ public class UnitSelectionHandler : MonoBehaviour
 
     private void StartSelectionArea()
     {
-        if (!Keyboard.current.leftShiftKey.isPressed &&
-            !Keyboard.current.rightShiftKey.isPressed)
+        if (!Keyboard.current.leftShiftKey.isPressed)
         {
             foreach (Unit selectedUnit in SelectedUnits)
             {
@@ -64,7 +64,7 @@ public class UnitSelectionHandler : MonoBehaviour
 
             SelectedUnits.Clear();
         }
-        
+
         unitSelectionArea.gameObject.SetActive(true);
 
         startPosition = Mouse.current.position.ReadValue();
@@ -96,7 +96,7 @@ public class UnitSelectionHandler : MonoBehaviour
 
             if (!hit.collider.TryGetComponent<Unit>(out Unit unit)) { return; }
 
-            if (!unit.isOwned) { return; }
+            if (!unit.hasAuthority) { return; }
 
             SelectedUnits.Add(unit);
 
@@ -114,7 +114,7 @@ public class UnitSelectionHandler : MonoBehaviour
         foreach (Unit unit in player.GetMyUnits())
         {
             if (SelectedUnits.Contains(unit)) { continue; }
-            
+
             Vector3 screenPosition = mainCamera.WorldToScreenPoint(unit.transform.position);
 
             if (screenPosition.x > min.x &&
@@ -127,9 +127,14 @@ public class UnitSelectionHandler : MonoBehaviour
             }
         }
     }
-    
+
     private void AuthorityHandleUnitDespawned(Unit unit)
     {
         SelectedUnits.Remove(unit);
+    }
+
+    private void ClientHandleGameOver(string winnerName)
+    {
+        enabled = false;
     }
 }

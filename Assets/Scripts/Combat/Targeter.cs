@@ -5,28 +5,40 @@ using UnityEngine;
 
 public class Targeter : NetworkBehaviour
 {
-    [SerializeField] private Targetable target;
-    
+    private Targetable target;
+
     public Targetable GetTarget()
     {
         return target;
     }
-    
-    #region Server
-    
+
+    public override void OnStartServer()
+    {
+        GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
+    }
+
+    public override void OnStopServer()
+    {
+        GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
+    }
+
     [Command]
     public void CmdSetTarget(GameObject targetGameObject)
     {
-        if (!targetGameObject.TryGetComponent<Targetable>(out Targetable target)) { return; }
+        if (!targetGameObject.TryGetComponent<Targetable>(out Targetable newTarget)) { return; }
 
-        this.target = target;
+        target = newTarget;
     }
-    
+
     [Server]
     public void ClearTarget()
     {
         target = null;
     }
-    
-    #endregion
+
+    [Server]
+    private void ServerHandleGameOver()
+    {
+        ClearTarget();
+    }
 }

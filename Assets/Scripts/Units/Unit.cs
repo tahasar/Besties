@@ -136,7 +136,7 @@ public class Unit : NetworkBehaviour
     {
         if (hasAuthority)
         {
-           float newY = startPosition.y + Mathf.Sin((Time.time + phaseOffset) * floatSpeed) * floatMagnitude;
+            var newY = startPosition.y + Mathf.Sin((Time.time + phaseOffset) * floatSpeed) * floatMagnitude;
             transform.position = new Vector3(transform.position.x, newY, transform.position.z);
         }
     }
