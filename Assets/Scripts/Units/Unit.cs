@@ -7,6 +7,12 @@ using UnityEngine.Events;
 
 public class Unit : NetworkBehaviour
 {
+    [SerializeField] private float floatSpeed = 1f;
+    [SerializeField] private float floatMagnitude = 0.5f;
+    private float phaseOffset;
+    private Vector3 startPosition;
+
+
     [SerializeField] private Health health = null;
     [SerializeField] private UnitMovement unitMovement = null;
     [SerializeField] private Targeter targeter = null;
@@ -113,7 +119,8 @@ public class Unit : NetworkBehaviour
     {
 
         AuthorityOnUnitSpawned?.Invoke(this);
-    }
+        phaseOffset = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+        startPosition = transform.position;    }
 
     public override void OnStopClient()
     {
@@ -123,6 +130,15 @@ public class Unit : NetworkBehaviour
         }
 
         AuthorityOnUnitDespawned?.Invoke(this);
+    }
+
+    private void Update()
+    {
+        if (hasAuthority)
+        {
+           float newY = startPosition.y + Mathf.Sin((Time.time + phaseOffset) * floatSpeed) * floatMagnitude;
+            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        }
     }
 
     public void Select()
