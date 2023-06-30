@@ -599,7 +599,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   colorRenderers:
-  - {fileID: 0}
+  - {fileID: 223923917573518268}
 --- !u!114 &-6858407481160500398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,6 +830,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 255d6706ff2ae604692646151873fa80, type: 3}
+--- !u!23 &223923917573518268 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 255d6706ff2ae604692646151873fa80, type: 3}
+  m_PrefabInstance: {fileID: 1502544469856907064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1391793985457031379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 255d6706ff2ae604692646151873fa80, type: 3}
