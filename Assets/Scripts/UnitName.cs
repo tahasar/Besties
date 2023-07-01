@@ -9,15 +9,11 @@ public class UnitName : MonoBehaviour
     private string unitName;
 
     [SerializeField]
-    private TMP_Text nameText; 
+    private TMP_Text nameText;
 
 
-private Camera _cam;
-
-    
     private void Start()
     {
-         _cam = Camera.main;
         nameText.text = unitName;
     }
 
@@ -25,9 +21,5 @@ private Camera _cam;
     {
         unitName = newName;
         nameText.text = unitName;
-    }
-
-    void Update(){
-        transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
     }
 }

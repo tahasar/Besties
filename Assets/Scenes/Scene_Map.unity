@@ -588,7 +588,7 @@ MonoBehaviour:
   unitSelectionArea: {fileID: 304367938}
   layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
 --- !u!4 &774474988
 Transform:
   m_ObjectHideFlags: 0
@@ -620,7 +620,7 @@ MonoBehaviour:
   unitSelectionHandler: {fileID: 774474987}
   layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1153
 --- !u!1 &909827399
 GameObject:
   m_ObjectHideFlags: 0
