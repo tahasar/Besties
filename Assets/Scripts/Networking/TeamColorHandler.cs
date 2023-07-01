@@ -15,7 +15,7 @@ public class TeamColorHandler : NetworkBehaviour
     public override void OnStartServer()
     {
         RTSPlayer player = connectionToClient.identity.GetComponent<RTSPlayer>();
-        teamColor = player.GetTeamColor();
+        //teamColor = player.GetTeamColor();
     }
     
     #endregion

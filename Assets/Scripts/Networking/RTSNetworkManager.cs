@@ -23,10 +23,10 @@ public class RTSNetworkManager : NetworkManager
 
         RTSPlayer player = connection.identity.GetComponent<RTSPlayer>();
         
-        player.SetTeamColor(new Color(
-            Random.Range(0f, 1f), 
-            Random.Range(0f, 1f), 
-            Random.Range(0f, 1f)));
+        //player.SetTeamColor(new Color(
+        //    Random.Range(0f, 1f), 
+        //    Random.Range(0f, 1f), 
+        //    Random.Range(0f, 1f)));
         
         
         GameObject unitSpawnerInstantiate = Instantiate(

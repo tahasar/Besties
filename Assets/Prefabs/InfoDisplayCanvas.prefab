@@ -170,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936086475438524746, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 936086475438524746, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_AnchorMin.x
@@ -178,7 +178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936086475438524746, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 936086475438524746, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_SizeDelta.x
@@ -218,11 +218,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936086475438524746, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 936086475438524746, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.099999994
       objectReference: {fileID: 0}
     - target: {fileID: 936086475438524746, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -239,10 +239,6 @@ PrefabInstance:
     - target: {fileID: 9091097502955248605, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
       propertyPath: m_Name
       value: HealthBarCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091097502955248605, guid: baa33fcac10368549ac563d84fb62adf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

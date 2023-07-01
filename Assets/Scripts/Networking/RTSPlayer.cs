@@ -1,33 +1,23 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
 public class RTSPlayer : NetworkBehaviour
 {
-    private Color teamColor = new Color();
-    [SerializeField] private List<Unit> myUnits = new List<Unit>();
+    [SerializeField] private Building[] buildings = new Building[0];
+
+    private List<Unit> myUnits = new List<Unit>();
     private List<Building> myBuildings = new List<Building>();
 
-    public Color GetTeamColor()
-    {
-        return teamColor;
-    }
-    
-    public List<Building> GetMyBuildings()
-    {
-        return myBuildings;
-    }
-    
     public List<Unit> GetMyUnits()
     {
         return myUnits;
     }
-    
-    [Server]
-    public void SetTeamColor(Color newTeamColor)
+
+    public List<Building> GetMyBuildings()
     {
-        teamColor = newTeamColor;
+        return myBuildings;
     }
 
     #region Server
@@ -44,6 +34,30 @@ public class RTSPlayer : NetworkBehaviour
     {
         Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
         Unit.ServerOnUnitDespawned -= ServerHandleUnitDespawned;
+        Building.ServerOnBuildingSpawned -= ServerHandleBuildingSpawned;
+        Building.ServerOnBuildingDespawned -= ServerHandleBuildingDespawned;
+    }
+
+    [Command]
+    public void CmdTryPlaceBuilding(int buildingId, Vector3 point)
+    {
+        Building buildingToPlace = null;
+
+        foreach (Building building in buildings)
+        {
+            if (building.GetId() == buildingId)
+            {
+                buildingToPlace = building;
+                break;
+            }
+        }
+
+        if (buildingToPlace == null) { return; }
+
+        GameObject buildingInstance =
+            Instantiate(buildingToPlace.gameObject, point, buildingToPlace.transform.rotation);
+
+        NetworkServer.Spawn(buildingInstance, connectionToClient);
     }
 
     private void ServerHandleUnitSpawned(Unit unit)
@@ -59,14 +73,14 @@ public class RTSPlayer : NetworkBehaviour
 
         myUnits.Remove(unit);
     }
-    
+
     private void ServerHandleBuildingSpawned(Building building)
     {
         if (building.connectionToClient.connectionId != connectionToClient.connectionId) { return; }
 
         myBuildings.Add(building);
     }
-    
+
     private void ServerHandleBuildingDespawned(Building building)
     {
         if (building.connectionToClient.connectionId != connectionToClient.connectionId) { return; }
@@ -90,7 +104,7 @@ public class RTSPlayer : NetworkBehaviour
 
     public override void OnStopClient()
     {
-        if (!isClientOnly || !isOwned) { return; }
+        if (!isClientOnly || !hasAuthority) { return; }
 
         Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
@@ -107,12 +121,12 @@ public class RTSPlayer : NetworkBehaviour
     {
         myUnits.Remove(unit);
     }
-    
+
     private void AuthorityHandleBuildingSpawned(Building building)
     {
         myBuildings.Add(building);
     }
-    
+
     private void AuthorityHandleBuildingDespawned(Building building)
     {
         myBuildings.Remove(building);
