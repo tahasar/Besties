@@ -102,3 +102,31 @@
 **Sprint Review**: Ekipteki bazı arkadaşlarımızın final haftasının geç bitmesi ve bayram tatili sebebiyle çalışmalarımız yavaş ilerledi. Ancak ekibimizdeki üyelerin bireysel yoğunluğu azaldığından ötürü ilk iki sprintte oluşan açığı son sprintte tamamlayabileceğimize inanıyoruz. 54 puan ile 2. sprinti tamamladık.
 
 **Sprint Retrospective**: Ekip üyelerimiz yoğunluğunu azalttığından dolayı bir sonraki sprintte oyunu bitirmeyi planlamaktayız.
+
+
+## Sprint 3
+**Sprint Notları**:  User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir. 
+
+**Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
+
+**Puan tamamlama mantığı**: Her bir göreve önemine göre yıldızlar verilmiş. Bir yıldız 6 puan değerindedir. Her bir sprintin 100 puan olması gerektiğini düşünürek toplam puanımız 300'dür.
+
+**Daily Scrum**: Yapılan toplantılara ait ekran görüntüleri aşağıdaki linkte yer almaktadır.
+
+[Link](https://docs.google.com/document/d/1nWqjy8pCMN9zjJdEOUI6qjtkbfp0CryeAvcoe2r9thQ/edit?usp=sharing)
+
+**Sprint board screenshotları**:
+
+
+
+**Ürün Durumu**: 
+
+
+
+
+**Ekran görüntüleri**: 
+
+
+**Sprint Review**: 
+
+**Sprint Retrospective**: 
