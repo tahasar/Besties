@@ -73,12 +73,13 @@
 
 **Puan tamamlama mantığı**: Her bir göreve önemine göre yıldızlar verilmiş. Bir yıldız 6 puan değerindedir. Her bir sprintin 100 puan olması gerektiğini düşünürek toplam puanımız 300'dür.
 
-**Daily Scrum**: Daily scrumlar bayram olduğundan ötürü her gün yapamasak da 2-3 günde bir muhakkak yapıldı. Yapılan toplantılara ait ekran görüntüleri aşağıdaki linkte yer almaktadır.
+**Daily Scrum**: Daily scrumlar bayram haftasında tatil olduğu için yapılmadı. Yapılan toplantılara ait ekran görüntüleri aşağıdaki linkte yer almaktadır.
 
 [Link](https://docs.google.com/document/d/1nWqjy8pCMN9zjJdEOUI6qjtkbfp0CryeAvcoe2r9thQ/edit?usp=sharing)
 
 **Sprint board screenshotları**:
 
+![image](https://github.com/tahasar/Besties/assets/119886364/3746833a-40b5-457c-9a8a-49e3fd4baac4)
 
 
 **Ürün Durumu**: 
@@ -96,7 +97,8 @@
 
 ![image](https://github.com/tahasar/Besties/assets/119886364/9d8089bd-db6b-46bf-ac9c-d3a2a724402f)
 
+![image](https://github.com/tahasar/Besties/assets/119886364/03b51dd3-c62c-4ffe-9604-f83de1178138)
 
-**Sprint Review**: Fikir bulma aşamasında çok fazla zorluk yaşanmadı. Ancak oyunumuzun özgün bir değer taşımasından ötürü ekipçe oyun dinamikleri tam olarak anlaşılana ve karar verilene kadar sık sık toplantılar yapıldı. Multiplayer yapılması planlandığından ötürü developerlar bu alana yoğunlaştı ve multiplayer base çalışır hale getirildi. 96 puan ile ilk sprinti tamamladık.
+**Sprint Review**: Ekipteki bazı arkadaşlarımızın final haftasının geç bitmesi ve bayram tatili sebebiyle çalışmalarımız yavaş ilerledi. Ancak ekibimizdeki üyelerin bireysel yoğunluğu azaldığından ötürü ilk iki sprintte oluşan açığı son sprintte tamamlayabileceğimize inanıyoruz. 54 puan ile 2. sprinti tamamladık.
 
-**Sprint Retrospective**: Ekibimiz kaynaştı ve iletişimde şuana kadar herhangi bir sıkıntı yaşamadık. Ekip final haftası olması sebebiyle çok vakit ayıramamıştır.
+**Sprint Retrospective**: Ekip üyelerimiz yoğunluğunu azalttığından dolayı bir sonraki sprintte oyunu bitirmeyi planlamaktayız.
