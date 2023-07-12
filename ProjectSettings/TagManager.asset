@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: zemin
+    uniqueID: 3094355145
+    locked: 0
+  - name: buton
+    uniqueID: 2348682497
+    locked: 0
