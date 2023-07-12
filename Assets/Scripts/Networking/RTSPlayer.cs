@@ -7,6 +7,7 @@ using UnityEngine;
 
  public class RTSPlayer : NetworkBehaviour
 {
+    [SerializeField] private GameObject cameraTransform = null;
     [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
     [SerializeField] private Building[] buildings = new Building[0];
     [SerializeField] private float buildingRangeLimit = 5f;
@@ -19,6 +20,11 @@ using UnityEngine;
     private Color teamColor = new Color();
     private List<Unit> myUnits = new List<Unit>();
     private List<Building> myBuildings = new List<Building>();
+    
+    public GameObject GetCameraTransform()
+    {
+        return cameraTransform;
+    }
 
     public Color GetTeamColor()
     {
@@ -71,6 +77,8 @@ using UnityEngine;
         Unit.ServerOnUnitDespawned += ServerHandleUnitDespawned;
         Building.ServerOnBuildingSpawned += ServerHandleBuildingSpawned;
         Building.ServerOnBuildingDespawned += ServerHandleBuildingDespawned;
+        
+        cameraTransform = GameObject.FindWithTag("MainCamera");
     }
 
     public override void OnStopServer()
