@@ -57,13 +57,13 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 4
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 5859480281317238225, guid: 088579ace7f15294f8af7eec61f68315, type: 3}
+  playerPrefab: {fileID: 3539399950056644229, guid: 088579ace7f15294f8af7eec61f68315, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 7028659536274822143, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+  - {fileID: 4074054646376511849, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
   - {fileID: 1127688160179784895, guid: 5a375781779b07a4eb8bc2bb79adf7e5, type: 3}
-  - {fileID: 2127669179619683225, guid: 658227035a3050447914f084ff670865, type: 3}
+  - {fileID: 1318931672890845468, guid: 658227035a3050447914f084ff670865, type: 3}
   - {fileID: 1681508625398248033, guid: 05011d83726780947ac75eb76cb60339, type: 3}
   - {fileID: 1127688160179784895, guid: 53d6649fbf7e13147b2510ffe76b7488, type: 3}
   - {fileID: 1127688160179784895, guid: 971a039bb21beb24792c6f179bf6f9a7, type: 3}
