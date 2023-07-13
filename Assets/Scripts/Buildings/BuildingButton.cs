@@ -62,10 +62,21 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
-            player.CmdTryPlaceBuilding(building.GetId(), hit.point);
+            if(CheckForMapBorders(hit.point))
+                player.CmdTryPlaceBuilding(building.GetId(), hit.point);
         }
 
         Destroy(buildingPreviewInstance);
+    }
+
+    private bool CheckForMapBorders(Vector3 point)
+    {
+        if (point.x < 50 && point.x > -50 && point.z < 50 && point.z > -50)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     private void UpdateBuildingPreview()
@@ -81,8 +92,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             buildingPreviewInstance.SetActive(true);
         }
 
-        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) ? Color.green : Color.red;
+        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) && CheckForMapBorders(hit.point) ? Color.green : Color.red;
 
-        buildingRendererInstance.material.SetColor("_BaseColor", color);
+        buildingRendererInstance.material.color = color;
     }
 }

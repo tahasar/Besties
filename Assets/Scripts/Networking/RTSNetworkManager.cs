@@ -28,7 +28,6 @@ public class RTSNetworkManager : NetworkManager
             Random.Range(0f, 1f), 
             Random.Range(0f, 1f)));
         
-        
         GameObject unitSpawnerInstantiate = Instantiate(
             unitSpawnerPrefab,
             connection.identity.transform.position,
