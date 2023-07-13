@@ -1408,15 +1408,5 @@ namespace Mirror
             if (!timeInterpolationGui) return;
             NetworkClient.OnGUI();
         }
-
-        public virtual void OnClientConnect(NetworkConnection connection)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void OnClientDisconnect(NetworkConnection connection)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
