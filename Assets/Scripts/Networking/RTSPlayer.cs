@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
- public class RTSPlayer : NetworkBehaviour
+public class RTSPlayer : NetworkBehaviour
 {
     [SerializeField] private GameObject cameraTransform = null;
     [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
@@ -14,13 +13,30 @@ using Random = UnityEngine.Random;
 
     [SyncVar(hook = nameof(ClientHandleResourcesUpdated))]
     private int resources = 500;
+    [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
+    private bool isPartyOwner = false;
+    [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
+    private string displayName;
 
     public event Action<int> ClientOnResourcesUpdated;
+
+    public static event Action ClientOnInfoUpdated;
+    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
 
     private Color teamColor = new Color();
     private List<Unit> myUnits = new List<Unit>();
     private List<Building> myBuildings = new List<Building>();
-    
+
+    public string GetDisplayName()
+    {
+        return displayName;
+    }
+
+    public bool GetIsPartyOwner()
+    {
+        return isPartyOwner;
+    }
+
     public GameObject GetCameraTransform()
     {
         return cameraTransform;
@@ -77,8 +93,8 @@ using Random = UnityEngine.Random;
         Unit.ServerOnUnitDespawned += ServerHandleUnitDespawned;
         Building.ServerOnBuildingSpawned += ServerHandleBuildingSpawned;
         Building.ServerOnBuildingDespawned += ServerHandleBuildingDespawned;
-        
-        cameraTransform = GameObject.FindWithTag("MainCamera");
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnStopServer()
@@ -87,6 +103,18 @@ using Random = UnityEngine.Random;
         Unit.ServerOnUnitDespawned -= ServerHandleUnitDespawned;
         Building.ServerOnBuildingSpawned -= ServerHandleBuildingSpawned;
         Building.ServerOnBuildingDespawned -= ServerHandleBuildingDespawned;
+    }
+
+    [Server]
+    public void SetDisplayName(string displayName)
+    {
+        this.displayName = displayName;
+    }
+
+    [Server]
+    public void SetPartyOwner(bool state)
+    {
+        isPartyOwner = state;
     }
 
     [Server]
@@ -99,6 +127,14 @@ using Random = UnityEngine.Random;
     public void SetResources(int newResources)
     {
         resources = newResources;
+    }
+
+    [Command]
+    public void CmdStartGame()
+    {
+        if (!isPartyOwner) { return; }
+
+        ((RTSNetworkManager)NetworkManager.singleton).StartGame();
     }
 
     [Command]
@@ -173,9 +209,24 @@ using Random = UnityEngine.Random;
         Building.AuthorityOnBuildingDespawned += AuthorityHandleBuildingDespawned;
     }
 
+    public override void OnStartClient()
+    {
+        if (NetworkServer.active) { return; }
+
+        DontDestroyOnLoad(gameObject);
+
+        ((RTSNetworkManager)NetworkManager.singleton).Players.Add(this);
+    }
+
     public override void OnStopClient()
     {
-        if (!isClientOnly || !isOwned) { return; }
+        ClientOnInfoUpdated?.Invoke();
+
+        if (!isClientOnly) { return; }
+
+        ((RTSNetworkManager)NetworkManager.singleton).Players.Remove(this);
+
+        if (!isOwned) { return; }
 
         Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
@@ -186,6 +237,18 @@ using Random = UnityEngine.Random;
     private void ClientHandleResourcesUpdated(int oldResources, int newResources)
     {
         ClientOnResourcesUpdated?.Invoke(newResources);
+    }
+
+    private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
+    {
+        ClientOnInfoUpdated?.Invoke();
+    }
+
+    private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
+    {
+        if (!isOwned) { return; }
+
+        AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
     }
 
     private void AuthorityHandleUnitSpawned(Unit unit)

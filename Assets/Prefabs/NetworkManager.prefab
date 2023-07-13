@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6734369929785624934}
   - component: {fileID: 5188007948589800361}
-  - component: {fileID: 618757990556727914}
-  - component: {fileID: 732392756796065407}
+  - component: {fileID: 5032808598402750346}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -51,9 +50,9 @@ MonoBehaviour:
   autoStartServerBuild: 1
   autoConnectClientBuild: 0
   sendRate: 30
-  offlineScene: Assets/Scenes/MenuScene.unity
-  onlineScene: Assets/Scenes/Scene_Map.unity
-  transport: {fileID: 618757990556727914}
+  offlineScene: Assets/Scenes/Lobby.unity
+  onlineScene: 
+  transport: {fileID: 5032808598402750346}
   networkAddress: localhost
   maxConnections: 4
   authenticator: {fileID: 0}
@@ -78,9 +77,9 @@ MonoBehaviour:
     dynamicAdjustmentTolerance: 1
     deliveryTimeEmaDuration: 2
   timeInterpolationGui: 0
-  unitSpawnerPrefab: {fileID: 1127688160179784895, guid: 5a375781779b07a4eb8bc2bb79adf7e5, type: 3}
-  gameOverHandler: {fileID: -1406201822768653583, guid: 05011d83726780947ac75eb76cb60339, type: 3}
---- !u!114 &618757990556727914
+  unitBasePrefab: {fileID: 1127688160179784895, guid: 5a375781779b07a4eb8bc2bb79adf7e5, type: 3}
+  gameOverHandlerPrefab: {fileID: -1406201822768653583, guid: 05011d83726780947ac75eb76cb60339, type: 3}
+--- !u!114 &5032808598402750346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,32 +88,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8973447776334018410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   port: 7777
+  DualMode: 1
   NoDelay: 1
-  SendTimeout: 5000
-  ReceiveTimeout: 30000
-  serverMaxMessageSize: 16384
-  serverMaxReceivesPerTick: 10000
-  serverSendQueueLimitPerConnection: 10000
-  serverReceiveQueueLimitPerConnection: 10000
-  clientMaxMessageSize: 16384
-  clientMaxReceivesPerTick: 1000
-  clientSendQueueLimit: 10000
-  clientReceiveQueueLimit: 10000
---- !u!114 &732392756796065407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8973447776334018410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetX: 0
-  offsetY: 0
+  Interval: 10
+  Timeout: 10000
+  RecvBufferSize: 7361536
+  SendBufferSize: 7361536
+  FastResend: 2
+  ReceiveWindowSize: 4096
+  SendWindowSize: 4096
+  MaxRetransmit: 40
+  MaximizeSocketBuffers: 1
+  ReliableMaxMessageSize: 297433
+  UnreliableMaxMessageSize: 1195
+  debugLog: 0
+  statisticsGUI: 0
+  statisticsLog: 0

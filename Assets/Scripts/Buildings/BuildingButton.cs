@@ -1,4 +1,4 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using TMPro;
@@ -27,16 +27,13 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         iconImage.sprite = building.GetIcon();
         priceText.text = building.GetPrice().ToString();
 
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
         buildingCollider = building.GetComponent<BoxCollider>();
     }
 
     private void Update()
-    {
-        if (player == null)
-        {
-            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
-        }
-
+    {            
         if (buildingPreviewInstance == null) { return; }
 
         UpdateBuildingPreview();
@@ -62,21 +59,10 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
-            if(CheckForMapBorders(hit.point))
-                player.CmdTryPlaceBuilding(building.GetId(), hit.point);
+            player.CmdTryPlaceBuilding(building.GetId(), hit.point);
         }
 
         Destroy(buildingPreviewInstance);
-    }
-
-    private bool CheckForMapBorders(Vector3 point)
-    {
-        if (point.x < 50 && point.x > -50 && point.z < 50 && point.z > -50)
-        {
-            return true;
-        }
-        else
-            return false;
     }
 
     private void UpdateBuildingPreview()
@@ -92,7 +78,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             buildingPreviewInstance.SetActive(true);
         }
 
-        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) && CheckForMapBorders(hit.point) ? Color.green : Color.red;
+        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) ? Color.green : Color.red;
 
         buildingRendererInstance.material.color = color;
     }

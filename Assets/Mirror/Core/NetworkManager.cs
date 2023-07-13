@@ -1413,5 +1413,10 @@ namespace Mirror
         {
             throw new NotImplementedException();
         }
+
+        public virtual void OnClientDisconnect(NetworkConnection connection)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
