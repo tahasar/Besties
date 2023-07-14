@@ -19,6 +19,13 @@ public class MainMenu : MonoBehaviour
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
 
+    private void Start()
+    {
+        lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
+        gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
+        lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
+    }
+
     public void HostLobbyWithoutSteam()
     {   
         useSteam = false;
@@ -33,9 +40,7 @@ public class MainMenu : MonoBehaviour
     {
         useSteam = true;
         NetworkManager.singleton.transport = NetworkManager.singleton.GetComponent<FizzySteamworks>();
-        lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
-        gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
-        lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
+        
         
         landingPagePanel.SetActive(false);
 
@@ -61,7 +66,7 @@ public class MainMenu : MonoBehaviour
         //SteamMatchmaking.SetLobbyData(
         //    new CSteamID(callback.m_ulSteamIDLobby),
         //    "DisplayName",
-        //    FindObjectOfType<DisplayNameInputField>().DisplayName);
+        //    SteamUser.GetPlayerSteamLevel().ToString());
         
         SteamMatchmaking.SetLobbyData(
             new CSteamID(callback.m_ulSteamIDLobby),
