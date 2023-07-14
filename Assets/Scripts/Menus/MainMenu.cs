@@ -63,10 +63,10 @@ public class MainMenu : MonoBehaviour
             "HostAddress",
             SteamUser.GetSteamID().ToString());
         
-        //SteamMatchmaking.SetLobbyData(
-        //    new CSteamID(callback.m_ulSteamIDLobby),
-        //    "DisplayName",
-        //    SteamUser.GetPlayerSteamLevel().ToString());
+        SteamMatchmaking.SetLobbyData(
+            new CSteamID(callback.m_ulSteamIDLobby),
+            "DisplayName",
+            SteamUser.GetPlayerSteamLevel().ToString());
         
         SteamMatchmaking.SetLobbyData(
             new CSteamID(callback.m_ulSteamIDLobby),
