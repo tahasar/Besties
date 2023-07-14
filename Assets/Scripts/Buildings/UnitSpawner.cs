@@ -60,7 +60,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
         GameObject unitInstance = Instantiate(
             unitPrefab.gameObject,
-            unitSpawnPoint.position,
+            new Vector3(unitSpawnPoint.position.x, unitSpawnPoint.position.y + 1f, unitSpawnPoint.position.z),
             unitSpawnPoint.rotation);
 
         NetworkServer.Spawn(unitInstance, connectionToClient);

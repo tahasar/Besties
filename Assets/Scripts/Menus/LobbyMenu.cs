@@ -48,7 +48,7 @@ public class LobbyMenu : MonoBehaviour
             playerNameTexts[i].text = "Waiting For Player...";
         }
 
-        startGameButton.interactable = players.Count >= 2;
+        //startGameButton.interactable = players.Count >= 2;
     }
 
     private void AuthorityHandlePartyOwnerStateUpdated(bool state)
@@ -71,7 +71,7 @@ public class LobbyMenu : MonoBehaviour
         {
             NetworkManager.singleton.StopClient();
 
-            SceneManager.LoadScene("Scene_Map");
+            SceneManager.LoadScene("Lobby");
         }
     }
 }

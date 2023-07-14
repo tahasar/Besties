@@ -91,12 +91,5 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             return true;
         }else
             return false;
-
-        //if (point.x < 50 && point.x > -50 && point.z < 50 && point.z > -50)
-        //{
-        //    return true;
-        //}
-        //else
-        //    return false;
     }
 }

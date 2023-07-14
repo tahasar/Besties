@@ -27,6 +27,7 @@ public class TeamColorHandler : NetworkBehaviour
         foreach (Renderer renderer in colorRenderers)
         {
             renderer.material.color = teamColor;
+            renderer.material.SetColor("_EmissionColor", teamColor);
         }
     }
     
