@@ -54,7 +54,7 @@ MonoBehaviour:
   sendRate: 30
   offlineScene: Assets/Scenes/Lobby.unity
   onlineScene: 
-  transport: {fileID: 2262486454599816761}
+  transport: {fileID: 0}
   networkAddress: localhost
   maxConnections: 4
   authenticator: {fileID: 0}
@@ -62,12 +62,12 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 4074054646376511849, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
   - {fileID: 1127688160179784895, guid: 5a375781779b07a4eb8bc2bb79adf7e5, type: 3}
   - {fileID: 1318931672890845468, guid: 658227035a3050447914f084ff670865, type: 3}
   - {fileID: 1681508625398248033, guid: 05011d83726780947ac75eb76cb60339, type: 3}
-  - {fileID: 1127688160179784895, guid: 53d6649fbf7e13147b2510ffe76b7488, type: 3}
   - {fileID: 1127688160179784895, guid: 971a039bb21beb24792c6f179bf6f9a7, type: 3}
+  - {fileID: 6304882569032112077, guid: f082f24abbecde74d8ec328f1848b152, type: 3}
+  - {fileID: 9138376935434353606, guid: 76c30fcae44debb40bae21f5646b9c8f, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     catchupNegativeThreshold: -1
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8973447776334018410}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using kcp2k;
 using Mirror;
+using Mirror.FizzySteam;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,35 +12,31 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject landingPagePanel = null;
 
-    [SerializeField] private bool useSteam = false;
-    
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
+
+    public void HostLobbyWithoutSteam()
+    {        
+        NetworkManager.singleton.transport = NetworkManager.singleton.GetComponent<KcpTransport>();
+
+        landingPagePanel.SetActive(false);
+
+        NetworkManager.singleton.StartHost();
+    }
     
-    private void Start()
+    public void HostLobbyWithSteam()
     {
-        if (!useSteam) { return; }
-        
+        NetworkManager.singleton.transport = NetworkManager.singleton.GetComponent<FizzySteamworks>();
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
-    }
-    
-    public void HostLobby()
-    {
+        
         landingPagePanel.SetActive(false);
-        
-        if (useSteam)
-        {
-            SteamMatchmaking.CreateLobby(
-                ELobbyType.k_ELobbyTypeFriendsOnly,
-                NetworkManager.singleton.maxConnections);
-            
-            return;
-        }
-        
-        NetworkManager.singleton.StartHost();
+
+        SteamMatchmaking.CreateLobby(
+            ELobbyType.k_ELobbyTypeFriendsOnly,
+            NetworkManager.singleton.maxConnections);
     }
     
     public void OnLobbyCreated(LobbyCreated_t callback)
@@ -60,10 +58,10 @@ public class MainMenu : MonoBehaviour
         //    "DisplayName",
         //    FindObjectOfType<DisplayNameInputField>().DisplayName);
         
-        SteamMatchmaking.SetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby),
-            "UseSteam",
-            useSteam.ToString());
+        //SteamMatchmaking.SetLobbyData(
+        //    new CSteamID(callback.m_ulSteamIDLobby),
+        //    "UseSteam",
+        //    useSteam.ToString());
         
         NetworkManager.singleton.StartHost();
     }
