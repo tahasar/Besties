@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using kcp2k;
@@ -11,13 +12,16 @@ using Steamworks;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject landingPagePanel = null;
+    
+    [SerializeField] private bool useSteam = false;
 
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
 
     public void HostLobbyWithoutSteam()
-    {        
+    {   
+        useSteam = false;
         NetworkManager.singleton.transport = NetworkManager.singleton.GetComponent<KcpTransport>();
 
         landingPagePanel.SetActive(false);
@@ -27,6 +31,7 @@ public class MainMenu : MonoBehaviour
     
     public void HostLobbyWithSteam()
     {
+        useSteam = true;
         NetworkManager.singleton.transport = NetworkManager.singleton.GetComponent<FizzySteamworks>();
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
@@ -58,10 +63,10 @@ public class MainMenu : MonoBehaviour
         //    "DisplayName",
         //    FindObjectOfType<DisplayNameInputField>().DisplayName);
         
-        //SteamMatchmaking.SetLobbyData(
-        //    new CSteamID(callback.m_ulSteamIDLobby),
-        //    "UseSteam",
-        //    useSteam.ToString());
+        SteamMatchmaking.SetLobbyData(
+            new CSteamID(callback.m_ulSteamIDLobby),
+            "UseSteam",
+            useSteam.ToString());
         
         NetworkManager.singleton.StartHost();
     }

@@ -59,7 +59,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
-            player.CmdTryPlaceBuilding(building.GetId(), hit.point);
+            if(player.CanPlaceBuilding(buildingCollider, hit.point) && CheckForMapBorders(hit))
+                player.CmdTryPlaceBuilding(building.GetId(), hit.point);
         }
 
         Destroy(buildingPreviewInstance);
@@ -69,7 +70,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask)) { return; }
+        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) { return; }
 
         buildingPreviewInstance.transform.position = hit.point;
 
@@ -78,8 +79,24 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             buildingPreviewInstance.SetActive(true);
         }
 
-        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) ? Color.green : Color.red;
+        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) && CheckForMapBorders(hit) ? Color.green : Color.red;
 
         buildingRendererInstance.material.color = color;
+    }
+    
+    private bool CheckForMapBorders(RaycastHit hit)
+    {
+        if (hit.collider.gameObject.CompareTag("Ground"))
+        {
+            return true;
+        }else
+            return false;
+
+        //if (point.x < 50 && point.x > -50 && point.z < 50 && point.z > -50)
+        //{
+        //    return true;
+        //}
+        //else
+        //    return false;
     }
 }

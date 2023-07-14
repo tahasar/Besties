@@ -160,7 +160,7 @@ public class RTSPlayer : NetworkBehaviour
         if (!CanPlaceBuilding(buildingCollider, point)) { return; }
 
         GameObject buildingInstance =
-            Instantiate(buildingToPlace.gameObject, point, buildingToPlace.transform.rotation);
+            Instantiate(buildingToPlace.gameObject, new Vector3(point.x, 0,point.z), buildingToPlace.transform.rotation);
 
         NetworkServer.Spawn(buildingInstance, connectionToClient);
 
