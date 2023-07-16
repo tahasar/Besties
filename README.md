@@ -8,22 +8,18 @@
 
 • **Serhat Kıldacı**: *Team Member/Developer*
 
-• **Emir Batu Akosman**: *Team Member/Developer*
-
-• **İrem Tekcan**: *Team Member/Developer*
 
 ### Ürün İsmi
 • PATOWAR
 
 ### Ürün Açıklaması
-• PATOWAR, vücudumuzda varolan yararlı ve zararlı mikroorganizmaların birbiriyle olan savaşını deneyimleyeceğiniz bir oyun.
+• PATOWAR, gelişen teknolojiyle insansı robotların özellikleri gün geçtikçe gelişmiştir. 3541 yılında robotlar o kadar insanlara benzemiştir ki nanorobotlardan oluşan mikropları kapıp hasta olabilmekte ve işlemcileri bu mikropları alt etmek için nanoantikorlar geliştirmektedir. 
 
 ### Ürün Özellikleri
 • Multiplayer
 
 • RTS
 
-• Eğitici
 
 ### Hedef Kitle
 • Biyoloji severler
@@ -127,6 +123,6 @@
 **Ekran görüntüleri**: 
 
 
-**Sprint Review**: 
+**Sprint Review**: Ekipteki 1 arkadaşımızla iletişim kuramadığımız için ve başka bir diğer arkadaşımızın da yeterince emek vermemesinden ötürü ekipten ayrıldılar. Oyunumuzun temasında ufak bir değişikliğe giderek daha teknoloji temalı ve ilgi çekici olması sağlanmaya çalışıldı. 
 
 **Sprint Retrospective**: 
