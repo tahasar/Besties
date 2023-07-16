@@ -9,7 +9,8 @@ public class RTSPlayer : NetworkBehaviour
     [SerializeField] private GameObject cameraTransform = null;
     [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
     [SerializeField] private Building[] buildings = new Building[0];
-    [SerializeField] private float buildingRangeLimit = 5f;
+    [SerializeField] private float buildingRangeLimitMax = 10f;
+    [SerializeField] private float buildingRangeLimitMin = 0.5f;
 
     [SyncVar(hook = nameof(ClientHandleResourcesUpdated))]
     private int resources = 500;
@@ -66,7 +67,7 @@ public class RTSPlayer : NetworkBehaviour
     {
         if (Physics.CheckBox(
                     point + buildingCollider.center,
-                    buildingCollider.size / 2,
+                    buildingCollider.size * 10 / 2,
                     Quaternion.identity,
                     buildingBlockLayer))
         {
@@ -75,10 +76,15 @@ public class RTSPlayer : NetworkBehaviour
 
         foreach (Building building in myBuildings)
         {
-            if ((point - building.transform.position).sqrMagnitude
-                <= buildingRangeLimit * buildingRangeLimit)
+            if ((point - building.transform.position).sqrMagnitude <= buildingRangeLimitMax * buildingRangeLimitMax)
             {
-                return true;
+                if ((point - building.transform.position).sqrMagnitude >= buildingRangeLimitMin * buildingRangeLimitMin)
+                {
+                    return true;
+                }else
+                {
+                    break;
+                }
             }
         }
 

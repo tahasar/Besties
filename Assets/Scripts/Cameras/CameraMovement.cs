@@ -15,12 +15,20 @@ public class CameraMovement : MonoBehaviour
 
     private Vector3 newPosition;
     private Quaternion newRotation;
-    private Vector3 newZoom;
+    private Vector3 camZoom;
 
     private Vector3 dragStartPosition;
     private Vector3 dragCurrentPosition;
     private Vector3 rotateStartPosition;
     private Vector3 rotateCurrentPosition;
+    
+    private int lowestZoom = 5;
+    private int highestZoom = 45;
+
+    private int minBorderZ = -100;
+    private int maxBorderZ = 100;
+    private int minBorderX = -100;
+    private int maxBorderX = 100;
 
     public Transform cameraTransform;
     
@@ -30,9 +38,9 @@ public class CameraMovement : MonoBehaviour
         Instance = this;
         newPosition = transform.position;
         newRotation = transform.rotation;
-        newZoom = cameraTransform.localPosition;
-        
-        
+        camZoom = cameraTransform.position;
+
+
     }
 
     // Update is called once per frame
@@ -47,7 +55,9 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y != 0)
         {
-            newZoom += zoomAmount * (Input.mouseScrollDelta.y * movementTime);
+            camZoom += zoomAmount * (Input.mouseScrollDelta.y * movementTime);
+            camZoom.y = Mathf.Clamp(camZoom.y, lowestZoom, highestZoom);
+            
         }
         
         if (Input.GetMouseButtonDown(2))
@@ -85,6 +95,8 @@ public class CameraMovement : MonoBehaviour
                     dragCurrentPosition = ray.GetPoint(entry);
 
                     newPosition = transform.position + dragStartPosition - dragCurrentPosition;
+                    newPosition.x = Mathf.Clamp(newPosition.x, minBorderX, maxBorderX);
+                    newPosition.z = Mathf.Clamp(newPosition.z, minBorderZ, maxBorderZ);
                 }
             }
             else
@@ -96,6 +108,8 @@ public class CameraMovement : MonoBehaviour
                 rotateStartPosition = rotateCurrentPosition;
             
                 newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / 5f));
+                newPosition.x = Mathf.Clamp(newPosition.x, minBorderX, maxBorderX);
+                newPosition.z = Mathf.Clamp(newPosition.z, minBorderZ, maxBorderZ);
             }
         }
     }
@@ -142,15 +156,20 @@ public class CameraMovement : MonoBehaviour
         
         if (Input.GetKey(KeyCode.R))
         {
-            newZoom += zoomAmount;
+            camZoom += zoomAmount;
+            camZoom.y = Mathf.Clamp(camZoom.y, lowestZoom, highestZoom);
         }
         if (Input.GetKey(KeyCode.F))
         {
-            newZoom += -zoomAmount;
+            camZoom += -zoomAmount;
+            camZoom.y = Mathf.Clamp(camZoom.y, lowestZoom, highestZoom);
         }
 
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
-        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
+        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, camZoom, Time.deltaTime * movementTime);
+        
+        newPosition.x = Mathf.Clamp(newPosition.x, minBorderX, maxBorderX);
+        newPosition.z = Mathf.Clamp(newPosition.z, minBorderZ, maxBorderZ);
     }
 }

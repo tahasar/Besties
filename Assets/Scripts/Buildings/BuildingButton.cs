@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mirror;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -59,10 +60,13 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
-            if(player.CanPlaceBuilding(buildingCollider, hit.point) && CheckForMapBorders(hit))
+            if(player.CanPlaceBuilding(buildingCollider, hit.point) && 
+               CheckForMapBorders(hit))
+            {
                 player.CmdTryPlaceBuilding(building.GetId(), hit.point);
+            }
         }
-
+        
         Destroy(buildingPreviewInstance);
     }
 
@@ -79,7 +83,9 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             buildingPreviewInstance.SetActive(true);
         }
 
-        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) && CheckForMapBorders(hit) ? Color.green : Color.red;
+        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) && 
+                      CheckForMapBorders(hit) ? 
+            Color.green : Color.red;
 
         buildingRendererInstance.material.color = color;
     }
