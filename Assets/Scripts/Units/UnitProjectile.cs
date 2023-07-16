@@ -9,17 +9,21 @@ public class UnitProjectile : NetworkBehaviour
     [SerializeField] private int damageToDeal = 20;
     [SerializeField] private float destroyAfterSeconds = 5f;
     [SerializeField] private float launchForce = 10f;
+    [SerializeField] private GameObject audioSourceObject = null; 
+
+    private AudioSource audioSource; 
 
     void Start()
     {
         rb.velocity = transform.forward * launchForce;
+        audioSource = audioSourceObject.GetComponent<AudioSource>(); 
     }
 
     public override void OnStartServer()
     {
         Invoke(nameof(DestroySelf), destroyAfterSeconds);
     }
-    
+
     [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
@@ -28,12 +32,14 @@ public class UnitProjectile : NetworkBehaviour
             if (networkIdentity.connectionToClient == connectionToClient)
                 return;
         }
-        
+
         if (other.TryGetComponent<Health>(out Health health))
         {
             health.DealDamage(damageToDeal);
         }
-        
+
+        audioSource.Play();
+
         DestroySelf();
     }
 
