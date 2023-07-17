@@ -12,12 +12,14 @@ public class UnitFiring : NetworkBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float rotationSpeed = 20f;
 
+    private Targetable target = null;
+
     private float lastFireTime;
 
     [ServerCallback]
     private void Update()
     {
-        Targetable target = targeter.GetTarget();
+        target = targeter.GetTarget();
 
         if (target == null) { return; }
         Debug.Log("target is not null");
@@ -51,7 +53,8 @@ public class UnitFiring : NetworkBehaviour
     [Server]
     private bool CanFireAtTarget()
     {
-        return (targeter.transform.position - transform.position).sqrMagnitude
+        
+        return (target.transform.position - transform.position).sqrMagnitude
                <= fireRange * fireRange;
     }
 }

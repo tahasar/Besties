@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5570644203547488890, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+      propertyPath: fireRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6001700106093226933, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
       propertyPath: sceneId
       value: 0
@@ -147,6 +151,10 @@ PrefabInstance:
     - target: {fileID: 8505518532400248766, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.42499998
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211255144094126536, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+      propertyPath: m_Speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9211255144094126536, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
       propertyPath: m_Height

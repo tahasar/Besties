@@ -8,7 +8,14 @@ public class InGameMenu : MonoBehaviour
 {
     public void LeaveGame()
     {
-        NetworkManager.singleton.StopClient();
+        if (NetworkClient.activeHost)
+        {
+            NetworkManager.singleton.StopHost();
+        }
+        else
+        {
+            NetworkManager.singleton.StopClient();
+        }
         
         SceneManager.LoadScene("Lobby");
     }
