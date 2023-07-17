@@ -406,6 +406,7 @@ MonoBehaviour:
   maxUnitQueue: 5
   spawnMoveRange: 7
   unitSpawnDuration: 5
+  networkManager: {fileID: 5188007948589800361, guid: 5137ba51183468a4eac84c06cdf53991, type: 3}
 --- !u!114 &7719443778976585949
 MonoBehaviour:
   m_ObjectHideFlags: 0
