@@ -5126,6 +5126,30 @@ PrefabInstance:
       propertyPath: m_text
       value: Crystal Miner
       objectReference: {fileID: 0}
+    - target: {fileID: 4593760219262357640, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4528999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593760219262357640, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: m_Size.y
+      value: 3.5071383
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593760219262357640, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: m_Size.z
+      value: 1.2413414
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593760219262357640, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593760219262357640, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: m_Center.y
+      value: 1.7185581
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593760219262357640, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4969764145680278522, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: m_Name
       value: ResourceGenerator
@@ -5228,6 +5252,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4969764145680278522, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6311607975065490352}
+    - targetCorrespondingSourceObject: {fileID: 4969764145680278522, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2251530646069162153}
   m_SourcePrefab: {fileID: 100100000, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
 --- !u!1 &1127688160179784895 stripped
 GameObject:
@@ -5265,6 +5292,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameDisplay: {fileID: 2690822906661683354}
+--- !u!135 &2251530646069162153
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127688160179784895}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.1353322
+  m_Center: {x: 0, y: 1.48, z: 0}
 --- !u!1 &2690822906661683354 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7929085693678923743, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}

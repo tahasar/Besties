@@ -16,7 +16,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] private LayerMask floorMask = new LayerMask();
 
     private Camera mainCamera;
-    private BoxCollider buildingCollider;
+    private SphereCollider buildingCollider;
     private RTSPlayer player;
     private GameObject buildingPreviewInstance;
     private Renderer buildingRendererInstance;
@@ -30,7 +30,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
 
-        buildingCollider = building.GetComponent<BoxCollider>();
+        buildingCollider = building.GetComponent<SphereCollider>();
     }
 
     private void Update()

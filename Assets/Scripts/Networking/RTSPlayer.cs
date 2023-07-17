@@ -63,11 +63,11 @@ public class RTSPlayer : NetworkBehaviour
         return myBuildings;
     }
 
-    public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 point)
+    public bool CanPlaceBuilding(SphereCollider buildingCollider, Vector3 point)
     {
         if (Physics.CheckBox(
                     point + buildingCollider.center,
-                    buildingCollider.size * 10 / 2,
+                    buildingCollider.center * 10 / 2,
                     Quaternion.identity,
                     buildingBlockLayer))
         {
@@ -161,7 +161,7 @@ public class RTSPlayer : NetworkBehaviour
 
         if (resources < buildingToPlace.GetPrice()) { return; }
 
-        BoxCollider buildingCollider = buildingToPlace.GetComponent<BoxCollider>();
+        SphereCollider buildingCollider = buildingToPlace.GetComponent<SphereCollider>();
 
         if (!CanPlaceBuilding(buildingCollider, point)) { return; }
 
