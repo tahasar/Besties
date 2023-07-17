@@ -123,6 +123,6 @@
 **Ekran görüntüleri**: 
 
 
-**Sprint Review**: Ekipteki 1 arkadaşımızla iletişim kuramadığımız için ve başka bir diğer arkadaşımızın da yeterince emek vermemesinden ötürü ekipten ayrıldılar. Oyunumuzun temasında ufak bir değişikliğe giderek daha teknoloji temalı ve ilgi çekici olması sağlanmaya çalışıldı. 
+**Sprint Review**: Ekipteki 1 arkadaşımızla iletişim kuramadığımız için ve başka bir diğer arkadaşımızın da yeterince emek vermemesinden ötürü ekipten ayrıldılar. Oyunumuzun temasında ufak bir değişikliğe giderek daha teknoloji temalı ve ilgi çekici olması sağlanmaya çalışıldı. 96 puan ile son sprint bitti.
 
-**Sprint Retrospective**: 
+**Sprint Retrospective**: Ekipten üyelerimizin ayrılmasına rağmen güzel bir çalışma sergileyerek oyunumuzu bitirdik.
