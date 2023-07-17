@@ -10,6 +10,7 @@ public class RTSNetworkManager : NetworkManager
 {
     [SerializeField] private GameObject unitBasePrefab = null;
     [SerializeField] private GameOverHandler gameOverHandlerPrefab = null;
+    public List<GameObject> unitList = new List<GameObject>();
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;

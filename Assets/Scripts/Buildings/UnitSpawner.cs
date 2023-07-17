@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
@@ -16,6 +18,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [SerializeField] private int maxUnitQueue = 5;
     [SerializeField] private float spawnMoveRange = 7f;
     [SerializeField] private float unitSpawnDuration = 5f;
+    private RTSNetworkManager networkManager = null;
 
     [SyncVar(hook = nameof(ClientHandleQueuedUnitsUpdated))]
     private int queuedUnits;
@@ -23,6 +26,11 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     private float unitTimer;
 
     private float progressImageVelocity;
+
+    private void Start()
+    {
+        networkManager = GameObject.Find("NetworkManager").GetComponent<RTSNetworkManager>();
+    }
 
     private void Update()
     {
@@ -62,7 +70,9 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
             unitPrefab.gameObject,
             new Vector3(unitSpawnPoint.position.x, unitSpawnPoint.position.y + 1f, unitSpawnPoint.position.z),
             unitSpawnPoint.rotation);
-
+        
+        networkManager.unitList.Add(unitInstance);
+        
         NetworkServer.Spawn(unitInstance, connectionToClient);
 
         Vector3 spawnOffset = Random.insideUnitSphere * spawnMoveRange;

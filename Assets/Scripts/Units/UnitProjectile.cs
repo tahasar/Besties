@@ -9,7 +9,7 @@ public class UnitProjectile : NetworkBehaviour
     [SerializeField] private int damageToDeal = 20;
     [SerializeField] private float destroyAfterSeconds = 5f;
     [SerializeField] private float launchForce = 10f;
-    [SerializeField] private GameObject audioSourceObject = null; 
+    [SerializeField] private AudioSource audioSourceObject = null; 
 
     private AudioSource audioSource; 
 
