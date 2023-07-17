@@ -113,16 +113,25 @@
 
 **Sprint board screenshotları**:
 
+![image](https://github.com/tahasar/Besties/assets/23361091/da821517-736d-4580-815a-aaf25e0d22e2)
 
 
 **Ürün Durumu**: 
 
-
-
+![image](https://github.com/tahasar/Besties/assets/23361091/a25b3bd6-0ae8-4641-972a-b5216dd55549)
+![image](https://github.com/tahasar/Besties/assets/23361091/e457eba2-24eb-415c-af22-cc14e97be7b4)
+![image](https://github.com/tahasar/Besties/assets/23361091/a46d38ac-a29d-41cc-94a3-67eb7d4aeb5a)
+![image](https://github.com/tahasar/Besties/assets/23361091/5de4cb81-c84b-4849-ae2c-d13eb1432af2)
+![image](https://github.com/tahasar/Besties/assets/23361091/f0bb8f75-f330-4794-bea0-7f6e7af4b991)
+![image](https://github.com/tahasar/Besties/assets/23361091/d7902860-6603-44c6-aca8-7e3b75c060bb)
+![image](https://github.com/tahasar/Besties/assets/23361091/a2aa57d4-aa67-4f82-948c-b7f5180b439d)
 
 **Ekran görüntüleri**: 
+![image](https://github.com/tahasar/Besties/assets/23361091/4836fe11-4cfc-44a0-b992-6a418f8e1b47)
+![image](https://github.com/tahasar/Besties/assets/23361091/810a08bb-5e88-44e9-9c09-ee6450b7f451)
+![image](https://github.com/tahasar/Besties/assets/23361091/3274a5f6-0da5-4c18-9859-e0d50bc2b7b7)
 
 
-**Sprint Review**: Ekipteki 1 arkadaşımızla iletişim kuramadığımız için ve başka bir diğer arkadaşımızın da yeterince emek vermemesinden ötürü ekipten ayrıldılar. Oyunumuzun temasında ufak bir değişikliğe giderek daha teknoloji temalı ve ilgi çekici olması sağlanmaya çalışıldı. 
+**Sprint Review**: Ekipteki 1 arkadaşımızla iletişim kuramadığımız için ve başka bir diğer arkadaşımızın da yeterince emek vermemesinden ötürü ekipten ayrıldılar. Oyunumuzun temasında ufak bir değişikliğe giderek daha teknoloji temalı ve ilgi çekici olması sağlanmaya çalışıldı. 96 puan ile son sprint bitti.
 
-**Sprint Retrospective**: 
+**Sprint Retrospective**: Ekipten üyelerimizin ayrılmasına rağmen güzel bir çalışma sergileyerek oyunumuzu bitirdik.
