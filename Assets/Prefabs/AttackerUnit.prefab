@@ -107,6 +107,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5543709152644647488, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+      propertyPath: m_text
+      value: Ranger
+      objectReference: {fileID: 0}
     - target: {fileID: 5570644203547488890, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
       propertyPath: fireRange
       value: 10
@@ -138,6 +142,10 @@ PrefabInstance:
     - target: {fileID: 6001700106093226933, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
       propertyPath: _assetId
       value: 3888787176
+      objectReference: {fileID: 0}
+    - target: {fileID: 6369559705659661543, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
+      propertyPath: maxHealth
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 7208824154642780076, guid: 14a9d8bd78e5ff644a2045173c5d2591, type: 3}
       propertyPath: m_RootOrder

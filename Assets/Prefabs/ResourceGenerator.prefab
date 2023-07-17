@@ -5058,6 +5058,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.42499998
       objectReference: {fileID: 0}
+    - target: {fileID: 2525898488253536066, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: maxHealth
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3174113122214359936, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5118,6 +5122,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3314244735118353395, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: m_text
+      value: Crystal Miner
+      objectReference: {fileID: 0}
     - target: {fileID: 4969764145680278522, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: m_Name
       value: ResourceGenerator
@@ -5141,10 +5149,10 @@ PrefabInstance:
     - target: {fileID: 6829670816295118436, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: 21300000, guid: 9ea72647c24be493ba6f15a9cd2a24ae, type: 3}
+      objectReference: {fileID: 21300000, guid: 2ab3801ce0b22b54a8989c7ac399593c, type: 3}
     - target: {fileID: 6829670816295118436, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: price
-      value: 50
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 6829670816295118436, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: buildingPreview

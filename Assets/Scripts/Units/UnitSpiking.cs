@@ -56,7 +56,7 @@ public class UnipSpiking : NetworkBehaviour
                 {
                     continue;
                 }
-                target.GetComponent<Health>().DealDamage(50);
+                target.GetComponent<Health>().DealDamage(70);
 
                 //var currentTarget = target.GetTarget();
                 //

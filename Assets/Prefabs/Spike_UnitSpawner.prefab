@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2525898488253536066, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
+      propertyPath: maxHealth
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 3174113122214359936, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -333,10 +337,10 @@ PrefabInstance:
     - target: {fileID: 6829670816295118436, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+      objectReference: {fileID: 21300000, guid: 7b768c971e5256b4bb6680fd35c90a0d, type: 3}
     - target: {fileID: 6829670816295118436, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: price
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6829670816295118436, guid: a012a3f2e5eff9d4bb2fcbaf72a4bd88, type: 3}
       propertyPath: buildingPreview
@@ -406,7 +410,6 @@ MonoBehaviour:
   maxUnitQueue: 5
   spawnMoveRange: 7
   unitSpawnDuration: 5
-  networkManager: {fileID: 5188007948589800361, guid: 5137ba51183468a4eac84c06cdf53991, type: 3}
 --- !u!114 &7719443778976585949
 MonoBehaviour:
   m_ObjectHideFlags: 0

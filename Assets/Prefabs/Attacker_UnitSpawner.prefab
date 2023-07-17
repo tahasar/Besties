@@ -112,6 +112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Attacker_UnitSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1556452360582039841, guid: 53d6649fbf7e13147b2510ffe76b7488, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: a81956c17ed99e64da5747c9ac262bce, type: 3}
     - target: {fileID: 2116428942211171496, guid: 53d6649fbf7e13147b2510ffe76b7488, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 3.97
@@ -231,6 +235,10 @@ PrefabInstance:
     - target: {fileID: 7445236685739056325, guid: 53d6649fbf7e13147b2510ffe76b7488, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517553457249433607, guid: 53d6649fbf7e13147b2510ffe76b7488, type: 3}
+      propertyPath: maxHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8897972564563710710, guid: 53d6649fbf7e13147b2510ffe76b7488, type: 3}
       propertyPath: m_Name

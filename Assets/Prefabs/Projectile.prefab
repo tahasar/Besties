@@ -170,7 +170,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   rb: {fileID: 9009990409208073344}
-  damageToDeal: 20
+  damageToDeal: 30
   destroyAfterSeconds: 5
   launchForce: 10
   audioSourceObject: {fileID: 5524379961250405144}
