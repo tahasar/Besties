@@ -8,34 +8,34 @@ public class RTSPlayer : NetworkBehaviour
 {
     [SerializeField] private GameObject cameraTransform = null;
     [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
-    [SerializeField] private Building[] buildings = new Building[0];
+    [SerializeField] private Building[] buildings = Array.Empty<Building>();
     [SerializeField] private float buildingRangeLimitMax = 10f;
     [SerializeField] private float buildingRangeLimitMin = 0.5f;
 
     [SyncVar(hook = nameof(ClientHandleResourcesUpdated))]
-    private int resources = 500;
+    private int _resources = 500;
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
-    private bool isPartyOwner = false;
+    private bool _isPartyOwner = false;
     [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
-    private string displayName;
+    private string _displayName;
 
     public event Action<int> ClientOnResourcesUpdated;
 
     public static event Action ClientOnInfoUpdated;
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
 
-    private Color teamColor = new Color();
-    private List<Unit> myUnits = new List<Unit>();
-    private List<Building> myBuildings = new List<Building>();
+    private Color _teamColor = new Color();
+    private readonly List<Unit> myUnits = new List<Unit>();
+    private readonly List<Building> myBuildings = new List<Building>();
 
     public string GetDisplayName()
     {
-        return displayName;
+        return _displayName;
     }
 
     public bool GetIsPartyOwner()
     {
-        return isPartyOwner;
+        return _isPartyOwner;
     }
 
     public GameObject GetCameraTransform()
@@ -45,12 +45,12 @@ public class RTSPlayer : NetworkBehaviour
 
     public Color GetTeamColor()
     {
-        return teamColor;
+        return _teamColor;
     }
 
     public int GetResources()
     {
-        return resources;
+        return _resources;
     }
 
     public List<Unit> GetMyUnits()
@@ -114,33 +114,33 @@ public class RTSPlayer : NetworkBehaviour
     [Server]
     public void SetDisplayName(string displayName)
     {
-        this.displayName = displayName;
+        this._displayName = displayName;
     }
 
     [Server]
     public void SetPartyOwner(bool state)
     {
-        isPartyOwner = state;
+        _isPartyOwner = state;
     }
 
     [Server]
     public void SetTeamColor(Color newTeamColor)
     {
-        teamColor = newTeamColor;
+        _teamColor = newTeamColor;
     }
 
     [Server]
     public void SetResources(int newResources)
     {
-        resources = newResources;
+        _resources = newResources;
     }
 
     [Command]
     public void CmdStartGame()
     {
-        if (!isPartyOwner) { return; }
+        if (!_isPartyOwner) { return; }
 
-        ((RTSNetworkManager)NetworkManager.singleton).StartGame();
+        ((RtsNetworkManager)NetworkManager.singleton).StartGame();
     }
 
     [Command]
@@ -159,7 +159,7 @@ public class RTSPlayer : NetworkBehaviour
 
         if (buildingToPlace == null) { return; }
 
-        if (resources < buildingToPlace.GetPrice()) { return; }
+        if (_resources < buildingToPlace.GetPrice()) { return; }
 
         SphereCollider buildingCollider = buildingToPlace.GetComponent<SphereCollider>();
 
@@ -170,7 +170,7 @@ public class RTSPlayer : NetworkBehaviour
 
         NetworkServer.Spawn(buildingInstance, connectionToClient);
 
-        SetResources(resources - buildingToPlace.GetPrice());
+        SetResources(_resources - buildingToPlace.GetPrice());
     }
 
     private void ServerHandleUnitSpawned(Unit unit)
@@ -221,7 +221,7 @@ public class RTSPlayer : NetworkBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        ((RTSNetworkManager)NetworkManager.singleton).Players.Add(this);
+        ((RtsNetworkManager)NetworkManager.singleton).Players.Add(this);
     }
 
     public override void OnStopClient()
@@ -230,7 +230,7 @@ public class RTSPlayer : NetworkBehaviour
 
         if (!isClientOnly) { return; }
 
-        ((RTSNetworkManager)NetworkManager.singleton).Players.Remove(this);
+        ((RtsNetworkManager)NetworkManager.singleton).Players.Remove(this);
 
         if (!isOwned) { return; }
 

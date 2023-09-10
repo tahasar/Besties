@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 
-public class FaceCamera : MonoBehaviour
+namespace Cameras
 {
-    private Transform mainCameraTransform;
-    
-    private void Awake()
+    public class FaceCamera : MonoBehaviour
     {
-        mainCameraTransform = Camera.main.transform;
-    }
+        private Transform _mainCameraTransform;
     
-    private void LateUpdate()
-    {
-        transform.LookAt(
-            transform.position + mainCameraTransform.rotation * Vector3.forward, 
-            mainCameraTransform.rotation * Vector3.up);
+        private void Awake()
+        {
+            if (Camera.main != null) _mainCameraTransform = Camera.main.transform;
+        }
+    
+        private void LateUpdate()
+        {
+            var rotation = _mainCameraTransform.rotation;
+            transform.LookAt(
+                transform.position + rotation * Vector3.forward, 
+                rotation * Vector3.up);
+        }
     }
 }

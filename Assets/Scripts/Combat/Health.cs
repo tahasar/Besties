@@ -9,7 +9,7 @@ public class Health : NetworkBehaviour
     [SerializeField] private int maxHealth = 100;
 
     [SyncVar(hook = nameof(HandleHealthUpdated))]
-    private int currentHealth;
+    private int _currentHealth;
 
     public event Action ServerOnDie;
 
@@ -19,7 +19,7 @@ public class Health : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        currentHealth = maxHealth;
+        _currentHealth = maxHealth;
 
         UnitBase.ServerOnPlayerDie += ServerHandlePlayerDie;
     }
@@ -34,17 +34,17 @@ public class Health : NetworkBehaviour
     {
         if (connectionToClient.connectionId != connectionId) { return; }
 
-        DealDamage(currentHealth);
+        DealDamage(_currentHealth);
     }
 
     [Server]
     public void DealDamage(int damageAmount)
     {
-        if (currentHealth == 0) { return; }
+        if (_currentHealth == 0) { return; }
 
-        currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
+        _currentHealth = Mathf.Max(_currentHealth - damageAmount, 0);
 
-        if (currentHealth != 0) { return; }
+        if (_currentHealth != 0) { return; }
 
         ServerOnDie?.Invoke();
     }

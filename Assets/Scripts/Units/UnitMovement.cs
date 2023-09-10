@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class UnitMovement : NetworkBehaviour
 {
     [SerializeField] private NavMeshAgent agent = null;
-    [SerializeField] private Targeter targeter = null;
+    [SerializeField] private Targeter targetter = null;
     [SerializeField] private float chaseRange = 10f;
 
     #region Server
@@ -23,7 +23,7 @@ public class UnitMovement : NetworkBehaviour
     [ServerCallback]
     private void Update()
     {
-        Targetable target = targeter.GetTarget();
+        Targetable target = targetter.GetTarget();
 
         if (target != null)
         {
@@ -55,7 +55,7 @@ public class UnitMovement : NetworkBehaviour
     [Server]
     public void ServerMove(Vector3 position)
     {
-        targeter.ClearTarget();
+        targetter.ClearTarget();
 
         if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
 

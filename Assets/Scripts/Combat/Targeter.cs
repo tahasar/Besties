@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Targeter : NetworkBehaviour
 {
-    private Targetable target;
+    private Targetable _target;
 
     public Targetable GetTarget()
     {
-        return target;
+        return _target;
     }
 
     public override void OnStartServer()
@@ -27,13 +27,13 @@ public class Targeter : NetworkBehaviour
     {
         if (!targetGameObject.TryGetComponent<Targetable>(out Targetable newTarget)) { return; }
 
-        target = newTarget;
+        _target = newTarget;
     }
 
     [Server]
     public void ClearTarget()
     {
-        target = null;
+        _target = null;
     }
 
     [Server]

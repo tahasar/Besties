@@ -13,14 +13,14 @@ public class JoinLobbyMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        RTSNetworkManager.ClientOnConnected += HandleClientConnected;
-        RTSNetworkManager.ClientOnDisconnected += HandleClientDisconnected;
+        RtsNetworkManager.ClientOnConnected += HandleClientConnected;
+        RtsNetworkManager.ClientOnDisconnected += HandleClientDisconnected;
     }
 
     private void OnDisable()
     {
-        RTSNetworkManager.ClientOnConnected -= HandleClientConnected;
-        RTSNetworkManager.ClientOnDisconnected -= HandleClientDisconnected;
+        RtsNetworkManager.ClientOnConnected -= HandleClientConnected;
+        RtsNetworkManager.ClientOnDisconnected -= HandleClientDisconnected;
     }
 
     public void Join()
@@ -39,7 +39,7 @@ public class JoinLobbyMenu : MonoBehaviour
 
         gameObject.SetActive(false);
         landingPagePanel.SetActive(false);
-        Debug.Log("bağlandı");
+        Debug.Log("connected");
     }
 
     private void HandleClientDisconnected()

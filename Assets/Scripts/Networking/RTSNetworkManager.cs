@@ -6,7 +6,7 @@ using Mirror.FizzySteam;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RTSNetworkManager : NetworkManager
+public class RtsNetworkManager : NetworkManager
 {
     [SerializeField] private GameObject unitBasePrefab = null;
     [SerializeField] private GameOverHandler gameOverHandlerPrefab = null;
@@ -15,7 +15,7 @@ public class RTSNetworkManager : NetworkManager
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
 
-    private bool isGameInProgress = false;
+    private bool _isGameInProgress = false;
 
     public List<RTSPlayer> Players { get; } = new List<RTSPlayer>();
 
@@ -23,7 +23,7 @@ public class RTSNetworkManager : NetworkManager
 
     public override void OnServerConnect(NetworkConnectionToClient conn)
     {
-        if (!isGameInProgress) { return; }
+        if (!_isGameInProgress) { return; }
 
         conn.Disconnect();
     }
@@ -41,14 +41,14 @@ public class RTSNetworkManager : NetworkManager
     {
         Players.Clear();
 
-        isGameInProgress = false;
+        _isGameInProgress = false;
     }
 
     public void StartGame()
     {
         //if (Players.Count < 2) { return; }
 
-        isGameInProgress = true;
+        _isGameInProgress = true;
 
         ServerChangeScene("Scene_Map");
     }

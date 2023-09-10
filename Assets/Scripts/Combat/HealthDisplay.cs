@@ -31,8 +31,11 @@ public class HealthDisplay : MonoBehaviour
     {
         // Rotate the health bar to face the camera
         if (healthBarParent.activeSelf)
-            healthBarParent.transform.LookAt(transform.position + _cam.transform.rotation * Vector3.forward,
-                _cam.transform.rotation * Vector3.up);
+        {
+            var rotation = _cam.transform.rotation;
+            healthBarParent.transform.LookAt(transform.position + rotation * Vector3.forward,
+                rotation * Vector3.up);
+        }
     }
 
     public void OnMouseEnter()

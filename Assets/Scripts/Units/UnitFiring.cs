@@ -12,41 +12,42 @@ public class UnitFiring : NetworkBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float rotationSpeed = 20f;
 
-    private Targetable target = null;
+    private Targetable _target = null;
 
-    private float lastFireTime;
+    private float _lastFireTime;
 
     [ServerCallback]
     private void Update()
     {
-        target = targeter.GetTarget();
+        _target = targeter.GetTarget();
 
-        if (target == null) { return; }
-        Debug.Log("target is not null");
+        if (_target == null) { return; }
+        Debug.Log("_target is not null");
 
         if (!CanFireAtTarget()) { return; }
-        Debug.Log("can fire at target");
+        Debug.Log("can fire at _target");
 
         Quaternion targetRotation =
-            Quaternion.LookRotation(target.transform.position - transform.position);
-        Debug.Log("target rotation");
+            Quaternion.LookRotation(_target.transform.position - transform.position);
+        Debug.Log("_target rotation");
 
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         Debug.Log("transform rotation");
 
-        if (Time.time > (1 / fireRate) + lastFireTime)
+        if (Time.time > (1 / fireRate) + _lastFireTime)
         {
             Debug.Log("time is greater than fire rate");
+            var position = projectileSpawnPoint.position;
             Quaternion projectileRotation = Quaternion.LookRotation(
-                target.GetAimAtPoint().position - projectileSpawnPoint.position);
+                _target.GetAimAtPoint().position - position);
 
             GameObject projectileInstance = Instantiate(
-                projectilePrefab, projectileSpawnPoint.position, projectileRotation);
+                projectilePrefab, position, projectileRotation);
 
             NetworkServer.Spawn(projectileInstance, connectionToClient);
 
-            lastFireTime = Time.time;
+            _lastFireTime = Time.time;
         }
     }
 
@@ -54,7 +55,7 @@ public class UnitFiring : NetworkBehaviour
     private bool CanFireAtTarget()
     {
         
-        return (target.transform.position - transform.position).sqrMagnitude
+        return (_target.transform.position - transform.position).sqrMagnitude
                <= fireRange * fireRange;
     }
 }

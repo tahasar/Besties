@@ -8,14 +8,14 @@ public class TeamColorHandler : NetworkBehaviour
     [SerializeField] private Renderer[] colorRenderers = new Renderer[0];
     
     [SyncVar(hook = nameof(HandleTeamColorUpdated))]
-    private Color teamColor = new Color();
+    private Color _teamColor = new Color();
 
     #region Server
     
     public override void OnStartServer()
     {
         RTSPlayer player = connectionToClient.identity.GetComponent<RTSPlayer>();
-        teamColor = player.GetTeamColor();
+        _teamColor = player.GetTeamColor();
     }
     
     #endregion
@@ -24,10 +24,10 @@ public class TeamColorHandler : NetworkBehaviour
     
     private void HandleTeamColorUpdated(Color oldColor, Color newColor)
     {
-        foreach (Renderer renderer in colorRenderers)
+        foreach (Renderer render in colorRenderers)
         {
-            renderer.material.color = teamColor;
-            renderer.material.SetColor("_EmissionColor", teamColor);
+            render.material.color = _teamColor;
+            render.material.SetColor("_EmissionColor", _teamColor);
         }
     }
     

@@ -8,11 +8,11 @@ public class UnitCommandGiver : MonoBehaviour
     [SerializeField] private UnitSelectionHandler unitSelectionHandler = null;
     [SerializeField] private LayerMask layerMask = new LayerMask();
 
-    private Camera mainCamera;
+    private Camera _mainCamera;
 
     private void Start()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
 
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
     }
@@ -26,7 +26,7 @@ public class UnitCommandGiver : MonoBehaviour
     {
         if (!Mouse.current.rightButton.wasPressedThisFrame) { return; }
 
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)) { return; }
 

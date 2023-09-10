@@ -13,7 +13,7 @@ public class Unit : NetworkBehaviour
     [SerializeField] private Targeter targeter = null;
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-    private RTSNetworkManager networkManager;
+    private RtsNetworkManager _networkManager;
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;
@@ -22,7 +22,7 @@ public class Unit : NetworkBehaviour
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkManager").GetComponent<RTSNetworkManager>();
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<RtsNetworkManager>();
     }
 
     public int GetResourceCost()
@@ -59,7 +59,7 @@ public class Unit : NetworkBehaviour
     [Server]
     private void ServerHandleDie()
     {
-        networkManager.unitList.Remove(gameObject);
+        _networkManager.unitList.Remove(gameObject);
         NetworkServer.Destroy(gameObject);
     }
 

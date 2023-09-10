@@ -18,18 +18,18 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [SerializeField] private int maxUnitQueue = 5;
     [SerializeField] private float spawnMoveRange = 7f;
     [SerializeField] private float unitSpawnDuration = 5f;
-    private RTSNetworkManager networkManager = null;
+    private RtsNetworkManager _networkManager = null;
 
     [SyncVar(hook = nameof(ClientHandleQueuedUnitsUpdated))]
-    private int queuedUnits;
+    private int _queuedUnits;
     [SyncVar]
-    private float unitTimer;
+    private float _unitTimer;
 
-    private float progressImageVelocity;
+    private float _progressImageVelocity;
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkManager").GetComponent<RTSNetworkManager>();
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<RtsNetworkManager>();
     }
 
     private void Update()
@@ -60,29 +60,30 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [Server]
     private void ProduceUnits()
     {
-        if (queuedUnits == 0) { return; }
+        if (_queuedUnits == 0) { return; }
 
-        unitTimer += Time.deltaTime;
+        _unitTimer += Time.deltaTime;
 
-        if (unitTimer < unitSpawnDuration) { return; }
+        if (_unitTimer < unitSpawnDuration) { return; }
 
+        var position = unitSpawnPoint.position;
         GameObject unitInstance = Instantiate(
             unitPrefab.gameObject,
-            new Vector3(unitSpawnPoint.position.x, unitSpawnPoint.position.y + 1f, unitSpawnPoint.position.z),
+            new Vector3(position.x, position.y + 1f, position.z),
             unitSpawnPoint.rotation);
         
-        networkManager.unitList.Add(unitInstance);
+        _networkManager.unitList.Add(unitInstance);
         
         NetworkServer.Spawn(unitInstance, connectionToClient);
 
         Vector3 spawnOffset = Random.insideUnitSphere * spawnMoveRange;
-        spawnOffset.y = unitSpawnPoint.position.y;
+        spawnOffset.y = position.y;
 
         UnitMovement unitMovement = unitInstance.GetComponent<UnitMovement>();
-        unitMovement.ServerMove(unitSpawnPoint.position + spawnOffset);
+        unitMovement.ServerMove(position + spawnOffset);
 
-        queuedUnits--;
-        unitTimer = 0f;
+        _queuedUnits--;
+        _unitTimer = 0f;
     }
 
     [Server]
@@ -94,13 +95,13 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [Command]
     private void CmdSpawnUnit()
     {
-        if (queuedUnits == maxUnitQueue) { return; }
+        if (_queuedUnits == maxUnitQueue) { return; }
 
         RTSPlayer player = connectionToClient.identity.GetComponent<RTSPlayer>();
 
         if (player.GetResources() < unitPrefab.GetResourceCost()) { return; }
 
-        queuedUnits++;
+        _queuedUnits++;
 
         player.SetResources(player.GetResources() - unitPrefab.GetResourceCost());
     }
@@ -111,7 +112,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
     private void UpdateTimerDisplay()
     {
-        float newProgress = unitTimer / unitSpawnDuration;
+        float newProgress = _unitTimer / unitSpawnDuration;
 
         if (newProgress < unitProgressImage.fillAmount)
         {
@@ -122,7 +123,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
             unitProgressImage.fillAmount = Mathf.SmoothDamp(
                 unitProgressImage.fillAmount,
                 newProgress,
-                ref progressImageVelocity,
+                ref _progressImageVelocity,
                 0.1f
             );
         }

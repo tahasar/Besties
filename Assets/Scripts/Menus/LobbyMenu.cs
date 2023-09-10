@@ -15,14 +15,14 @@ public class LobbyMenu : MonoBehaviour
 
     private void Start()
     {
-        RTSNetworkManager.ClientOnConnected += HandleClientConnected;
+        RtsNetworkManager.ClientOnConnected += HandleClientConnected;
         RTSPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
         RTSPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
     }
 
     private void OnDestroy()
     {
-        RTSNetworkManager.ClientOnConnected -= HandleClientConnected;
+        RtsNetworkManager.ClientOnConnected -= HandleClientConnected;
         RTSPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
         RTSPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
     }
@@ -36,7 +36,7 @@ public class LobbyMenu : MonoBehaviour
 
     private void ClientHandleInfoUpdated()
     {
-        List<RTSPlayer> players = ((RTSNetworkManager)NetworkManager.singleton).Players;
+        List<RTSPlayer> players = ((RtsNetworkManager)NetworkManager.singleton).Players;
 
         for (int i = 0; i < players.Count; i++)
         {

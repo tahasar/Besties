@@ -12,22 +12,22 @@ public class UnipSpiking : NetworkBehaviour
     [SerializeField] private float fireRange = 2f;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float rotationSpeed = 20f;
-    private RTSNetworkManager networkManager = null;
+    private RtsNetworkManager _networkManager = null;
     [SerializeField] private List<Targeter> targeters = new List<Targeter>();
 
-    private Targetable target = null;
+    private Targetable _target = null;
 
-    private float lastFireTime;
+    private float _lastFireTime;
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkManager").GetComponent<RTSNetworkManager>();
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<RtsNetworkManager>();
     }
 
     [ServerCallback] //
     private void Update()
     {
-        foreach (GameObject unit in networkManager.unitList)
+        foreach (GameObject unit in _networkManager.unitList)
         {
             if (unit.GetComponent<NetworkIdentity>().connectionToClient == connectionToClient)
             {
@@ -48,7 +48,7 @@ public class UnipSpiking : NetworkBehaviour
         
         
 
-        if (Time.time > (1 / fireRate) + lastFireTime)
+        if (Time.time > (1 / fireRate) + _lastFireTime)
         {
             foreach (Targeter target in targeters)
             {
@@ -57,13 +57,14 @@ public class UnipSpiking : NetworkBehaviour
                     continue;
                 }
                 target.GetComponent<Health>().DealDamage(70);
-
+                
+                #region old code
                 //var currentTarget = target.GetTarget();
                 //
                 //Quaternion targetRotation =
                 //    Quaternion.LookRotation(currentTarget.transform.position - transform.position);
                 //Debug.Log("target rotation");
-//
+                //
                 //transform.rotation = Quaternion.RotateTowards(
                 //    transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
                 //Debug.Log("transform rotation");
@@ -71,27 +72,28 @@ public class UnipSpiking : NetworkBehaviour
                 //Debug.Log("time is greater than fire rate");
                 //Quaternion projectileRotation = Quaternion.LookRotation(
                 //    currentTarget.GetAimAtPoint().position - spikejectileSpawnPoint.position);
-//
+                //
                 //GameObject projectileInstance = Instantiate(
                 //    spikejectilePrefab, spikejectileSpawnPoint.position, projectileRotation);
-//
+                //
                 //NetworkServer.Spawn(projectileInstance, connectionToClient);
+                #endregion
             }
             
-            lastFireTime = Time.time;
+            _lastFireTime = Time.time;
         }
 
     }
     
     public void GetTarget()
     {
-        target = targeter.GetTarget();
+        _target = targeter.GetTarget();
     }
 
     [Server]
     private bool CanFireAtTarget()
     {
-        return (target.transform.position - transform.position).sqrMagnitude
+        return (_target.transform.position - transform.position).sqrMagnitude
                <= fireRange * fireRange;
     }
 }

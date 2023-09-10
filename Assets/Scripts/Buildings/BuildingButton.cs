@@ -15,27 +15,27 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] private TMP_Text priceText = null;
     [SerializeField] private LayerMask floorMask = new LayerMask();
 
-    private Camera mainCamera;
-    private SphereCollider buildingCollider;
-    private RTSPlayer player;
-    private GameObject buildingPreviewInstance;
-    private Renderer buildingRendererInstance;
+    private Camera _mainCamera;
+    private SphereCollider _buildingCollider;
+    private RTSPlayer _player;
+    private GameObject _buildingPreviewInstance;
+    private Renderer _buildingRendererInstance;
 
     private void Start()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
 
         iconImage.sprite = building.GetIcon();
         priceText.text = building.GetPrice().ToString();
 
-        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+        _player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
 
-        buildingCollider = building.GetComponent<SphereCollider>();
+        _buildingCollider = building.GetComponent<SphereCollider>();
     }
 
     private void Update()
     {            
-        if (buildingPreviewInstance == null) { return; }
+        if (_buildingPreviewInstance == null) { return; }
 
         UpdateBuildingPreview();
     }
@@ -44,50 +44,50 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (eventData.button != PointerEventData.InputButton.Left) { return; }
 
-        if (player.GetResources() < building.GetPrice()) { return; }
+        if (_player.GetResources() < building.GetPrice()) { return; }
 
-        buildingPreviewInstance = Instantiate(building.GetBuildingPreview());
-        buildingRendererInstance = buildingPreviewInstance.GetComponentInChildren<Renderer>();
+        _buildingPreviewInstance = Instantiate(building.GetBuildingPreview());
+        _buildingRendererInstance = _buildingPreviewInstance.GetComponentInChildren<Renderer>();
 
-        buildingPreviewInstance.SetActive(false);
+        _buildingPreviewInstance.SetActive(false);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (buildingPreviewInstance == null) { return; }
+        if (_buildingPreviewInstance == null) { return; }
 
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
-            if(player.CanPlaceBuilding(buildingCollider, hit.point) && 
+            if(_player.CanPlaceBuilding(_buildingCollider, hit.point) && 
                CheckForMapBorders(hit))
             {
-                player.CmdTryPlaceBuilding(building.GetId(), hit.point);
+                _player.CmdTryPlaceBuilding(building.GetId(), hit.point);
             }
         }
         
-        Destroy(buildingPreviewInstance);
+        Destroy(_buildingPreviewInstance);
     }
 
     private void UpdateBuildingPreview()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        var ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) { return; }
 
-        buildingPreviewInstance.transform.position = hit.point;
+        _buildingPreviewInstance.transform.position = hit.point;
 
-        if (!buildingPreviewInstance.activeSelf)
+        if (!_buildingPreviewInstance.activeSelf)
         {
-            buildingPreviewInstance.SetActive(true);
+            _buildingPreviewInstance.SetActive(true);
         }
 
-        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) && 
+        Color color = _player.CanPlaceBuilding(_buildingCollider, hit.point) && 
                       CheckForMapBorders(hit) ? 
             Color.green : Color.red;
 
-        buildingRendererInstance.material.color = color;
+        _buildingRendererInstance.material.color = color;
     }
     
     private bool CheckForMapBorders(RaycastHit hit)

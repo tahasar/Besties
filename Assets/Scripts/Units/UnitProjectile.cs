@@ -11,12 +11,12 @@ public class UnitProjectile : NetworkBehaviour
     [SerializeField] private float launchForce = 10f;
     [SerializeField] private AudioSource audioSourceObject = null; 
 
-    private AudioSource audioSource; 
+    private AudioSource _audioSource; 
 
     void Start()
     {
         rb.velocity = transform.forward * launchForce;
-        audioSource = audioSourceObject.GetComponent<AudioSource>(); 
+        _audioSource = audioSourceObject.GetComponent<AudioSource>(); 
     }
 
     public override void OnStartServer()
@@ -38,7 +38,7 @@ public class UnitProjectile : NetworkBehaviour
             health.DealDamage(damageToDeal);
         }
 
-        audioSource.Play();
+        _audioSource.Play();
 
         DestroySelf();
     }
